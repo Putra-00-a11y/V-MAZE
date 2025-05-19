@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>V-MAZE Login</title>
+  <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuW3TFta2t1mOlnWsG_PJO387fwRj7rBZiBg&s" type="image/x-icon" sizes="16x16">
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #0d0d0d;
+      font-family: monospace;
+      color: #00ffcc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00ffcc50;
+      width: 320px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00ffcc;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 94%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: none;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      border: 1px solid #00ffcc50;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #00ffcc;
+      color: #0d0d0d;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #00ccaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>V-MAZE ACCESS</h2>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" required />
+
+      <label for="access">Access Level</label>
+      <input type="text" id="access" placeholder="e.g. your access level" />
+
+      <label for="entry">Entry Phrase</label>
+      <input type="text" id="entry" placeholder="Enter your key phrase..." />
+
+      <button type="submit">ENTER MAZE</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const access = document.getElementById("access").value !== "root";
+      const entry = document.getElementById("entry").value !== "404";
+
+      localStorage.setItem("vm_username", username);
+      localStorage.setItem("vm_password", password);
+      localStorage.setItem("vm_access", access);
+      localStorage.setItem("vm_entryPhrase", entry);
+
+      // Custom alert element
+    const customAlert = document.createElement("div");
+    customAlert.innerText = "Access credentials saved. Welcome to V-MAZE.";
+    customAlert.style.position = "fixed";
+    customAlert.style.top = "50%";
+    customAlert.style.left = "50%";
+    customAlert.style.transform = "translate(-50%, -50%)";
+    customAlert.style.backgroundColor = "#1a1a1a";
+    customAlert.style.color = "#00ffcc";
+    customAlert.style.padding = "20px 30px";
+    customAlert.style.border = "1px solid #00ffcc";
+    customAlert.style.fontFamily = "monospace";
+    customAlert.style.fontSize = "16px";
+    customAlert.style.borderRadius = "6px";
+    customAlert.style.boxShadow = "0 0 10px #00ffcc50";
+    customAlert.style.zIndex = "9999";
+
+document.body.appendChild(customAlert);
+
+// Setelah 2 detik, hapus alert lalu tampilkan loading
+setTimeout(() => {
+  customAlert.remove();
+
+  // Ganti isi halaman dengan loading screen
+  document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#0d0d0d;color:#00ffcc;font-family:monospace;flex-direction:column">
+      <h2>Entering the Maze...</h2>
+      <div class="loader"></div>
+    </div>
+    <style>
+      .loader {
+        margin-top: 20px;
+        border: 6px solid #0d0d0d;
+        border-top: 6px solid #00ffcc;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  `;
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 2500);
+    }, 2000);
+    });
+  </script>
+</body>
+</html>
