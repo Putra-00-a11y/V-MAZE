@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CyberLore | Profile</title>
+  <style>
+    body {
+      margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #eee;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    /* Sidebar style */
+    .sidebar {
+      width: 220px;
+      background-color: #1f1f1f;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: slideIn 0.7s ease forwards;
+    }
+    .sidebar a {
+      color: #ccc;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #3a3a3a;
+      color: #fff;
+    }
+    /* Main content */
+    .content {
+      flex-grow: 1;
+      padding: 40px 30px;
+      box-sizing: border-box;
+      animation: fadeIn 1s ease forwards;
+    }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+    .avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #00bcd4;
+      box-shadow: 0 0 15px #00bcd4aa;
+      animation: avatarFadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    .profile-info h1 {
+      margin: 0 0 10px;
+      font-size: 2.2rem;
+      color: #00bcd4;
+    }
+    .profile-info p.bio {
+      margin: 0 0 15px;
+      font-size: 1rem;
+      color: #bbb;
+      max-width: 600px;
+    }
+    /* Skill bars */
+    .skills {
+      max-width: 700px;
+    }
+    .skill {
+      margin-bottom: 15px;
+    }
+    .skill-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .skill-bar {
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 20px;
+    }
+    .skill-level {
+      height: 100%;
+      background: #00bcd4;
+      width: 0;
+      transition: width 1.2s ease;
+      border-radius: 10px;
+    }
+    /* Animations */
+    @keyframes slideIn {
+      from {transform: translateX(-100%);}
+      to {transform: translateX(0);}
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @keyframes avatarFadeIn {
+      to {opacity: 1;}
+    }
+
+    .profile-contact {
+  background-color: #222;
+  padding: 15px 25px;
+  border-radius: 12px;
+  max-width: 550px;
+  margin: 20px auto;
+  color: #eee;
+  box-shadow: 0 0 15px rgba(0,0,0,0.7);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-contact h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #f0a500;
+  letter-spacing: 1.2px;
+}
+
+.profile-contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-contact li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.profile-contact li:hover {
+  color: #f0a500;
+  cursor: default;
+}
+
+.profile-contact .icon {
+  font-size: 1.6rem;
+  margin-right: 12px;
+  width: 30px;
+  text-align: center;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.profile-contact a {
+  color: #eee;
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.profile-contact a:hover {
+  border-bottom: 1px dotted #f0a500;
+}
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <a href="/index.html">Home</a>
+    <a href="/profil.html" class="active">Profile</a>
+    <!-- Tambah nav lain kalau perlu -->
+  </nav>
+  <main class="content">
+    <img src="https://i.pravatar.cc/150?img=12" alt="Avatar Profile" class="avatar" />
+    <!-- ... bagian atas tetap sama ... -->
+<section class="profile-header">
+    <div class="profile-info">
+      <h1>Putra | Developer CyberLore</h1>
+      <p class="bio">
+        Seorang developer dan script enthusiast yang suka belajar teknologi keamanan dan eksplorasi OS.
+        Passionate untuk membangun solusi yang bermanfaat dan membagikan ilmu ke pemula.
+        Dengan pengalaman lebih dari 4 tahun, fokus pada pengembangan tools script dan edukasi digital.
+      </p>
+  
+      <h3>Deskripsi Singkat :</h3>
+      <p>
+        Kenalin gw putra, gw tekun dan berdedikasi dalam bidang teknologi informasi, terutama pada aspek scripting, materi keamanan siber dan etika dasar.
+        gw percaya bahwa edukasi adalah kunci utama untuk melindungi diri di dunia digital yang semakin kompleks. 
+        Selain coding, gw juga aktif menulis artikel tutorial dan membuat situs edukasi yang mudah dipahami ini. Salken.
+      </p>
+
+      <section class="quote">
+        <blockquote>
+          "Pengetahuan tidak cukup dimengerti jikalau tanpa konsistensi yang tinggi, Be Consistent."  
+          <footer>- Putra</footer>
+        </blockquote>
+      </section>      
+
+    <section class="skills">
+        <h2>Skills</h2>
+        <div class="skill">
+          <div class="skill-name">HTML & CSS</div>
+          <div class="skill-bar"><div class="skill-level" data-level="87%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-bar"><div class="skill-level" data-level="89%"></div></div>
+        </div>
+        <div class="skill">
+            <div class="skill-name">Python</div>
+            <div class="skill-bar"><div class="skill-level" data-level="44%"></div></div>
+        </div>
+        <div class="skill">
+            <div class="skill-name">PHP</div>
+            <div class="skill-bar"><div class="skill-level" data-level="36%"></div></div>
+        </div>
+        <div class="skill">
+            <div class="skill-name">Execution Scripts</div>
+            <div class="skill-bar"><div class="skill-level" data-level="96%"></div></div>
+        </div>
+        <div class="skill">
+            <div class="skill-name">Hostingers | Push</div>
+            <div class="skill-bar"><div class="skill-level" data-level="68%"></div></div>
+        </div>
+        <hr>
+        <div class="skill">
+            <div class="skill-name">Communication</div>
+            <div class="skill-bar"><div class="skill-level" data-level="66%"></div></div>
+        </div>
+        <div class="skill">
+            <div class="skill-name">Jam Terbang | Aktivitas Harian</div>
+            <div class="skill-bar"><div class="skill-level" data-level="99%"></div></div>
+        </div>
+        <div class="skill">
+            <div class="skill-name">Creativity</div>
+            <div class="skill-bar"><div class="skill-level" data-level="89%"></div></div>
+        </div>
+        <hr>
+        <div class="skill">
+            <div class="skill-name">Front-End</div>
+            <div class="skill-bar"><div class="skill-level" data-level="96%"></div></div>
+        </div>
+        <div class="skill">
+            <div class="skill-name">Back-End</div>
+            <div class="skill-bar"><div class="skill-level" data-level="62%"></div></div>
+        </div>
+        <div class="skill">
+            <div class="skill-name">CyberSecurity</div>
+            <div class="skill-bar"><div class="skill-level" data-level="66%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-name">Backdoor Tester</div>
+          <div class="skill-bar"><div class="skill-level" data-level="78%"></div></div>
+        </div>
+        <!-- Tambah skill lain jika perlu -->
+    </section>
+
+    <section class="timeline">
+        <h2>Timeline</h2>
+        <ul>
+          <li><strong>2019:</strong> Memulai memasuki dunia pemrograman (Berawal Scratch).</li>
+          <li><strong>2020:</strong> Belajar HTML, CSS dan JavaScript sebagai basic learning awal.</li>
+          <li><strong>2022:</strong> Berkembangnya hingga membuat projek situs kelas.</li>
+          <li><strong>2024:</strong> Memasuki dunia pemrograman lebih dalam (belajar scripting dan OS).</li>
+          <li><strong>Sekarang:</strong> Membuat dan mengembangkan situs belajar siber.</li>
+        </ul>
+      </section>      
+  
+      <h3>Keterangan Lain</h3>
+      <ul>
+        <li><strong>Usia:</strong> 18 tahun</li>
+        <li><strong>Lokasi:</strong> Jawa Timur, Indonesia</li>
+        <li><strong>Hobi:</strong> Musik dan ngoding</li>
+        <li><strong>Keahlian Khusus:</strong> Front-End based, pemrograman web, scripting</li>
+        <li><strong>Bahasa Favorit:</strong> JavaScript</li>
+      </ul>
+    </div>
+  </section>  
+
+  <section class="profile-contact">
+    <h2>Kontak</h2>
+    <ul>
+      <li><span class="icon">📧</span> Email: <a href="mailto:email@domain.com"> psoputt@gmail.com</a></li>
+      <li><span class="icon">📱</span> Telepon: <a href="tel:+62123456789"> +62 822-3443-5745</a></li>
+      <li><span class="icon">🌐</span> Website: <a href="https://example.com" target="_blank" rel="noopener noreferrer">-</a></li>
+      <li><span class="icon">📍</span> Lokasi: Jawa Timur, Indonesia</li>
+    </ul>
+  </section>  
+  </main>
+
+  <script>
+    // Animate skill bars on load
+    window.addEventListener('load', () => {
+      const bars = document.querySelectorAll('.skill-level');
+      bars.forEach(bar => {
+        const level = bar.getAttribute('data-level');
+        setTimeout(() => {
+          bar.style.width = level;
+        }, 300);
+      });
+    });
+  </script>
+</body>
+</html>

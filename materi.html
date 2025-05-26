@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi CyberX</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      background-color: #0f0f0f;
+      color: #e0e0e0;
+      scroll-behavior: smooth;
+      height: 100vh;
+    }
+
+    .materi-sidebar {
+      width: 220px;
+      background: #111;
+      padding: 20px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+    }
+
+    .materi-sidebar h3 {
+      margin-bottom: 15px;
+      color: #00ffc3;
+    }
+
+    .materi-sidebar ul {
+      list-style: none;
+    }
+
+    .materi-sidebar a {
+      text-decoration: none;
+      display: block;
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .materi-sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    .materi-content {
+      flex: 1;
+      padding: 30px 40px;
+      overflow-y: auto;
+    }
+
+    .materi-content article {
+      margin-bottom: 60px;
+    }
+
+    .materi-content h2 {
+      margin-bottom: 12px;
+      color: #00ffc3;
+    }
+
+    .materi-content h3 {
+        margin-top: 15px;
+        margin-bottom: 5px;
+        color: #00ffc3;
+    }
+
+    .materi-content p {
+      line-height: 1.7;
+    }
+
+    .materi-sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.materi-sidebar ul li {
+  margin-bottom: 8px;
+}
+
+.materi-sidebar ul li ul {
+  margin-top: 4px;
+  margin-left: 16px;
+}
+
+.materi-sidebar ul li ul li {
+  font-size: 0.95em;
+  margin-bottom: 4px;
+}
+
+.a0 {
+  color: #099;
+}
+
+.a1 {
+    color: rgb(29, 224, 224);
+}
+
+.back-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 45px;
+  background-color: #222;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  z-index: 999;
+  transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #444;
+}
+
+.image-slider {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  opacity: 90%;
+}
+
+.slide-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide-img.active {
+  opacity: 1;
+}
+
+.slide-imgo {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  position: absolute;
+  opacity: 90%;
+}
+
+h4 {
+  color: lightcoral;
+  margin-top: 5px;
+}
+
+.distro-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.distro {
+  background: #111;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+.distro img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.distro h3 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+  color: #00ffe5;
+}
+
+.distro p {
+  font-size: 14px;
+  color: #ccc;
+}
+
+aside {
+  height: 100%;
+  max-height: 700px;
+  overflow-y: scroll;
+}
+
+#bab-penutup {
+  padding: 40px 20px;
+  background: #0a0a0a;
+  color: #eee;
+}
+
+#bab-penutup h2 {
+  font-size: 28px;
+  color: #00ffe5;
+  margin-bottom: 20px;
+}
+
+#bab-penutup p {
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+#bab-penutup blockquote {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 4px solid #00ffe5;
+  padding: 15px;
+  margin: 20px 0;
+}
+
+#bab-interaktif {
+  background: #121212;
+  color: #eee;
+  font-family: 'Consolas', monospace;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 30px auto;
+  box-shadow: 0 0 15px #00ff99aa;
+}
+
+#bab-interaktif h2 {
+  text-align: center;
+  color: #00ff99;
+  text-shadow: 0 0 6px #00ff99;
+  margin-bottom: 10px;
+}
+
+#bab-interaktif p {
+  text-align: center;
+  font-size: 1.1em;
+  margin-bottom: 25px;
+  color: #aaa;
+}
+
+#quizForm div {
+  margin-bottom: 18px;
+  padding: 12px;
+  background: #1c1c1c;
+  border-radius: 6px;
+  box-shadow: inset 0 0 10px #00ff9933;
+}
+
+#quizForm p {
+  font-weight: 700;
+  font-size: 1.05em;
+  margin-bottom: 8px;
+  color: #00ff99;
+  text-shadow: 0 0 4px #00ff99;
+}
+
+#quizForm label {
+  display: block;
+  padding-left: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  user-select: none;
+  color: #ccc;
+  transition: color 0.3s ease;
+}
+
+#quizForm label:hover {
+  color: #00ff99;
+}
+
+#quizForm input[type="radio"] {
+  margin-right: 8px;
+  accent-color: #00ff99;
+}
+
+#submitBtn {
+  display: block;
+  width: 100%;
+  background-color: #00ff99;
+  color: #121212;
+  font-weight: 900;
+  font-size: 1.2em;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00ff99;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  user-select: none;
+}
+
+#submitBtn:hover:not(:disabled) {
+  background-color: #00cc77;
+  color: #f0f0f0;
+}
+
+#submitBtn:disabled {
+  background-color: #333;
+  color: #777;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+#result {
+  text-align: center;
+  font-size: 1.4em;
+  margin-top: 20px;
+  color: #00ff99;
+  text-shadow: 0 0 10px #00ff99aa;
+  min-height: 2em;
+  user-select: text;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+  </style>
+</head>
+<body>
+    <aside class="materi-sidebar">
+        <h3>📚 Daftar Materi</h3>
+        <ul>
+          <li>
+            <a href="#judul1" class="a0">1. Pengantar Dunia Cyber</a>
+          </li>
+          <li>
+            <a href="#judul2" class="a0">2. Etika & Legalitas</a>
+            <ul>
+                <li><a href="#sub2-1" class="a1">2.1 Pengaruh Dunia</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#judul3" class="a0">3. Dasar Jaringan</a>
+            <ul>
+              <li><a href="#sub3-1" class="a1">3.1 Macam-Macam Jaringan</a></li>
+              <li><a href="#sub3-2" class="a1">3.2 Topologi Jaringan</a></li>
+              <li><a href="#sub3-3" class="a1">3.3 Protokol Dasar</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#judul4" class="a0">4. Cyber Attack & Defense</a>
+            <ul>
+              <li><a href="#sub4-1" class="a1">4.1 Pengantar Serangan Cyber</a></li>
+              <li><a href="#sub4-2" class="a1">4.2 Cyber Killing Chain</a></li>
+              <li><a href="#sub4-3" class="a1">4.3 Teknik Pertahanan</a></li>
+              <li><a href="#sub4-4" class="a1">4.4 Tools Umum</a></li>
+              <li><a href="#sub4-5" class="a1">4.5 Incident Response Plan</a></li>
+            </ul>
+          </li>
+          <li><a href="#judul5" class="a0">5. Sistem Operasi (OS)</a>
+          <ul>
+            <li><a href="#sub5-1" class="a1">5.1 Sistem Operasi Windows</a></li>
+            <li><a href="#sub5-2" class="a1">5.2 Sistem Operasi macOS</a></li>
+            <li><a href="#sub5-3" class="a1">5.3 Sistem Operasi Linux</a></li>
+          </ul></li>
+          <li><a href="#judul6" class="a0">6. Pengantar Linux</a><ul>
+            <li><a href="#sub6-1" class="a1">6.1 Sejarah Awal Linux</a></li>
+            <li><a href="#sub6-2" class="a1">6.2 Konsep Open-Source & GUI-nya</a></li>
+            <li><a href="#sub6-3" class="a1">6.3 Struktur Sistem Operasi Linux</a></li>
+            <li><a href="#sub6-4" class="a1">6.4 Distribusi Linux (Populer)</a></li>
+            <li><a href="#sub6-5" class="a1">6.5 Peran Linux</a></li>
+          </ul></li>
+          <li><a href="#judul7" class="a0">7. Penutup</a></li>
+          <li><a href="#bab-interaktif" class="a0">8. Tes Soal</a></li>
+        </ul>
+      </aside>      
+
+  <section class="materi-content">
+    <article id="judul1">
+    <div class="image-slider">
+        <img src="https://www.unite.ai/wp-content/uploads/2024/09/AI-threat-landscape.webp" alt="img0" loading="lazy" class="slide-img" />
+        <img src="https://www.securities.io/wp-content/uploads/2025/01/Futuristic-Digital-Landscape-1.png?wsr" alt="img0" loading="lazy" class="slide-img" />
+        <img src="https://img.freepik.com/free-photo/background-computer-insecurity-hacking-3d-illustration_1419-2806.jpg?semt=ais_hybrid&w=740" alt="img2" loading="lazy" class="slide-img" />
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/006/521/775/small_2x/virus-malware-cyber-attack-and-internet-cyber-security-concept-photo.jpg" alt="img3" loading="lazy" class="slide-img" />
+        <img src="https://blog.totalprosource.com/hs-fs/hubfs/iStock-917566410.jpg?width=2448&name=iStock-917566410.jpg" alt="img4" loading="lazy" class="slide-img" />
+        <img src="https://i0.wp.com/picjumbo.com/wp-content/uploads/cyber-security-abstract-background-free-image.jpeg?w=600&quality=80" alt="img5" loading="lazy" class="slide-img" />
+        <img src="https://www.ncuindia.edu/wp-content/uploads/2024/06/Cybersecurity.Threat.Landscape.webp" alt="img6" loading="lazy" class="slide-img" />
+        <img src="https://media.licdn.com/dms/image/v2/C4E12AQHBjd6tAPtCCQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1650632146703?e=2147483647&v=beta&t=sbMNTvYsL0IhBcDilXOv25sJXldDD5znVrg2aS6SRvE" alt="img7" loading="lazy" class="slide-img" />
+        <img src="https://s33104.pcdn.co/wp-content/uploads/2023/11/Header-The-Evolving-Landscape-of-Cybersecurity-in-the-Public-Sector-scaled.jpg" alt="img8" loading="lazy" class="slide-img" />
+        <img src="https://images.stockcake.com/public/b/b/c/bbc94bcb-881d-4a80-bcac-13b3838d5a19_large/cybersecurity-urban-landscape-stockcake.jpg" alt="img9" loading="lazy" class="slide-img" />
+        <img src="https://w0.peakpx.com/wallpaper/651/619/HD-wallpaper-approaching-the-geopolitical-and-cyber-threat-landscape-with-business-risk-intelligence-it-security-guru.jpg" alt="img10" loading="lazy" class="slide-img" />
+        <img src="https://stage2data.com/wp-content/uploads/2022/09/cybersecurity-blog-12-April-1024x505.jpg" alt="img11" loading="lazy" class="slide-img" />
+        <img src="https://wallpapers.com/images/featured/hacker-full-hd-ze6d067myguoy8s3.jpg" alt="img12" loading="lazy" class="slide-img" />
+        <img src="https://c4.wallpaperflare.com/wallpaper/598/482/363/black-black-and-white-anonymous-hackers-wallpaper-preview.jpg" alt="img13" loading="lazy" class="slide-img" />
+        <img src="https://wallpapers.com/images/hd/hacker-guy-fawkes-malcolm-x-n0re2jp3rgi7abx1.jpg" alt="img14" loading="lazy" class="slide-img" />
+        <img src="https://wallpapers.com/images/hd/man-with-hacker-code-full-hd-23a3svr5fv051bjl.jpg" alt="img15" loading="lazy" class="slide-img" />
+        <img src="https://wallpapers.com/images/hd/cool-anonymous-hacker-mask-05t2rtpn7xd67yce.jpg" alt="img16" loading="lazy" class="slide-img" />
+        <img src="https://wallpapers.com/images/hd/kali-linux-the-flaming-dragon-aopaijkc6i77lb07.jpg" alt="img17" loading="lazy" class="slide-img" />
+        <img src="https://wallup.net/wp-content/uploads/2019/09/43883-commands-linux-archlinux-terminal-computer-system-programming-748x421.png" alt="img18" loading="lazy" class="slide-img" />
+        <img src="https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg" alt="img19" loading="lazy" class="slide-img" />
+        <img src="https://w0.peakpx.com/wallpaper/1021/487/HD-wallpaper-technology-code-programming-programmer.jpg" alt="img20" loading="lazy" class="slide-img" />
+    </div>
+
+      <h2>△ |Pengantar Dunia Cyber|</h2>
+      <p>
+        Dunia siber bukan sekadar soal coding dan terminal gelap. Ini adalah dunia baru tempat informasi jadi senjata dan pengetahuan jadi kekuatan. Di sini lu bakal belajar dasar-dasar dunia cyber dari nol, tanpa harus jago duluan.
+      </p> <br>
+      <p>
+        Dulu, orang nganggep hacker itu cuma orang nyolong akun medsos. Sekarang? Hacker itu bisa jadi pelindung sistem, pemburu celah keamanan, bahkan penegak hukum digital. Cyber bukan soal kriminal, tapi soal siapa yang lebih siap dan ngerti teknologi.
+      </p> <br>
+      <p>
+        Di CyberX, lu bakal mulai dari hal paling dasar: pemahaman soal data, privasi, struktur komputer, sampai koneksi internet. Gak langsung ke exploit atau tool berat. Semua butuh fondasi, bro. Mau jadi pentester, bug hunter, atau bahkan digital forensic expert, semua mulai dari satu titik: ngerti dasar.
+      </p> <br>
+      <p>
+        Belajar cyber juga ngajarin cara mikir kritis, teliti, dan sistematis. Setiap error punya penyebab, dan setiap sistem punya titik lemahnya. Lu dilatih buat ngerti struktur, cari celah, dan bangun solusi. Ini bukan ilmu hafalan. Ini ilmu survival digital.
+      </p> <br>
+      <p>
+        Jadi siapin pikiran lu. Jangan terburu-buru pengen bisa segalanya. Satu demi satu, materi di sini disusun buat ngasih pemahaman yang kokoh. Gak peduli latar belakang lu, semua orang punya kesempatan buat jadi paham dunia cyber. Asal konsisten dan gak males nyoba.
+      </p> <br>
+      <p>
+        Ingat, di dunia nyata, pengetahuan adalah kekuatan. Tapi di dunia cyber, pengetahuan adalah perlindungan. Semakin banyak lu tahu, semakin kecil kemungkinan lu jadi korban. CyberX hadir buat bantu lu jadi lebih dari sekadar pengguna — tapi jadi pengendali dunia digital lu sendiri.
+      </p>      
+    </article>
+
+    <article id="judul2">
+    <div class="image-slider">
+      <img src="https://eccweb.s3.ap-south-1.amazonaws.com/wp-content/uploads/2022/04/26103925/THE-ROLE-OF-CYBER-LAWS-IN-CYBERSECURITY-1.png" alt="img0" loading="lazy" class="slide-imgo" />
+    </div>
+      <h2>△ |Etika & Legalitas|</h2>
+      <p>
+        Gak semua yang bisa lu hack itu boleh lu sentuh. Di sini kita bahas etika digital, hukum siber, dan batas moral yang harus lu tahu sebelum ngelangkah lebih jauh. Skill tinggi gak berarti bebas aturan.
+      </p> <br>
+      <p>
+        Dunia cyber bukan zona bebas hukum. Meski lu bisa ngelakuin banyak hal di balik layar, bukan berarti semuanya boleh. Etika dan legalitas itu pondasi penting buat nentuin arah dan batas gerak lu di dunia digital.
+      </p> <br>
+      <p>
+        Banyak yang baru belajar cyber langsung penasaran gimana cara nge-hack akun orang atau masuk sistem tanpa izin. Tapi itu udah masuk ranah ilegal. Bahkan sekadar nyoba akses sistem tanpa izin bisa dijerat UU ITE dan hukum cyber lainnya. Ini bukan main-main.
+      </p> <br>
+      <p>
+        Hacker sejati itu justru yang ngerti batas. Lu bisa tau cara bobol sistem, tapi bukan buat nyakitin, ngambil data, atau merugikan orang lain. Justru lu bantu perbaiki sistem, laporin bug, dan bikin keamanan makin kuat. Itulah kenapa ada istilah "white hat".
+      </p> <br>
+      <p>
+        Etika cyber juga soal gimana lu berinteraksi. Jangan asal ngasih info palsu, nyebar hoax, atau narik data tanpa izin. Setiap langkah lu di dunia digital ninggalin jejak, dan itu bisa jadi bukti hukum. Lu harus tau mana yang etis dan mana yang melanggar.
+      </p> <br>
+      <p>
+        Di CyberX, lu bakal belajar dengan pendekatan aman dan legal. Semua materi, simulasi, dan praktek diarahkan biar lu bisa belajar tanpa takut nyalahi aturan. Tujuannya bukan buat jadi peretas ilegal, tapi jadi pengamat, pelindung, dan pengembang sistem yang bijak.
+      </p> <br>
+      <p>
+        Kalau lu bener-bener pengen terjun ke dunia cyber professional, etika dan hukum itu bekal utama. Banyak perusahaan butuh orang yang jago tapi juga bisa dipercaya. Gak cukup pinter, lu juga harus punya integritas.
+      </p> <br>
+      <p>
+        Jadi inget, belajar cyber bukan cuma soal skill, tapi juga soal tanggung jawab. Jangan biarin rasa penasaran bikin lu nyebrang ke sisi gelap. Pahami hukum, pegang etika, dan jadilah bagian dari solusi di dunia digital ini.
+      </p>      
+      <hr style="margin-top: 5px;">
+      <h3 id="sub2-1">2.1 Pengaruh Dunia :</h3>
+      <p>
+        Dunia cyber bukan lagi cuma urusan teknis atau sekadar mainan anak IT. Pengaruhnya udah global, nyentuh semua sektor: pemerintahan, ekonomi, pendidikan, bahkan budaya. Negara-negara berlomba ngembangin sistem pertahanan siber mereka buat ngelindungi data dan infrastruktur vital.
+      </p>
+      <p>
+        Serangan siber kayak ransomware atau phishing bisa lumpuhin rumah sakit, bank, bahkan bandara. Dampaknya bisa chaos banget. Makanya, pemahaman soal etika dan legalitas gak cuma buat taat aturan, tapi juga buat jaga stabilitas dunia digital.
+      </p>
+      <p>
+        Di sisi lain, ada juga negara yang nyalahgunain kekuatan cyber buat spionase, propaganda, bahkan perang siber. Inilah kenapa belajar dunia cyber itu penting, karena lu bakal jadi bagian dari perubahan global ini—entah sebagai defender atau attacker. It's up to you!.
+      </p>
+    </article>
+
+    <article id="judul3">
+     <div class="image-slider">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhi5u7FgOIT5WJhz0w4d7IcucSfghsCk2KLA48NhAaukfDG-zLHH2_hROpR1cEHKVAPUVR5sZc7aH8ljwJzDxNsskGIUTLd-1p37lHg9QHDarYynQGR5VrtFP8bRV0yPHzVFsh8Fk2bMcEC/s1600/Management+Network.jpg" alt="img0" loading="lazy" class="slide-imgo" />
+    </div>
+      <h2>△ |Dasar Jaringan|</h2>
+      <p>
+        Semua hal yang berkaitan dengan cyber itu pasti nyangkut ke jaringan. IP Address, DNS, port, protokol — semua ini bakal jadi pondasi utama buat lu ngerti cara kerja komunikasi di internet.
+      </p>
+      <p>
+        Dasar jaringan itu pondasi utama buat masuk ke dunia cyber. Kalau lu gak paham konsep dasarnya, susah buat ngerti cara kerja serangan atau sistem keamanan. <br><br>
+      
+        Jadi, jaringan itu sebenernya cuma cara berbagai perangkat bisa saling komunikasi. Dari HP, laptop, server — semuanya nyambung lewat jaringan. Bisa kabel (LAN) atau tanpa kabel (WiFi). <br><br>
+      
+        Ada istilah IP Address, itu kayak alamat rumah tapi versi digital. Tiap perangkat punya IP biar bisa dikenali di jaringan. Trus ada juga DNS, dia semacam "buku kontak" yang nyambungin nama domain (kayak google.com) ke IP aslinya. <br><br>
+      
+        Lu juga harus tau protokol penting kayak TCP/IP, HTTP, FTP, SMTP. Itu semua ngatur gimana data dikirim dan diterima. Bayangin protokol kayak aturan main biar data gak berantakan waktu nyampe tujuan. <br><br>
+      
+        Router, switch, firewall — itu alat-alat yang bantu ngatur dan ngamanin jalur komunikasi. Kalau gak ada mereka, data bisa bocor ke mana-mana atau bahkan diretas. <br><br>
+      
+        Intinya, dasar jaringan itu bukan buat dipelajarin doang, tapi buat dipahami biar tiap langkah lu di dunia cyber punya arah. Tanpa ngerti jaringan, belajar cyber security bakal kerasa kayak nebak-nebak doang. <br><br>
+      
+        Di CyberX, lu bakal banyak ketemu istilah dan tools yang berhubungan sama jaringan. Jadi pastiin dasar ini bener-bener nyangkut dulu di otak.
+      </p>     
+      <hr style="margin-top: 5px;">
+      <h3 id="sub3-1">3.1 Macam - Macam Jaringan :</h3>
+      <p>
+        Di dunia networking, jaringan gak cuma satu jenis doang. Ada banyak tipe jaringan yang dibedain berdasarkan skala, cakupan, sama fungsinya. Nih, gua kasih list paling umum yang wajib lu tau: <br><br>
+      
+        🔸 **LAN (Local Area Network)** <br>
+        Jaringan skala kecil yang biasanya dipake di rumah, kantor, atau sekolah. Semua perangkat yang nyambung ke LAN bisa sharing data, printer, atau koneksi internet. <br><br>
+      
+        🔸 **MAN (Metropolitan Area Network)** <br>
+        Jaringan yang lebih gede dari LAN tapi gak segede WAN. Cocok buat ngubungin beberapa gedung di satu kota. Biasanya dipake buat perusahaan atau kampus yang punya banyak cabang dalam satu area. <br><br>
+      
+        🔸 **WAN (Wide Area Network)** <br>
+        Ini jaringan paling luas, bisa nyambungin antar kota, negara, bahkan benua. Internet yang lu pake tiap hari tuh contoh WAN paling nyata. <br><br>
+      
+        🔸 **WLAN (Wireless LAN)** <br>
+        Sama kayak LAN, tapi tanpa kabel. Semua perangkat nyambung lewat WiFi. Praktis dan fleksibel, tapi rawan kalau gak dikasih keamanan yang cukup. <br><br>
+      
+        🔸 **PAN (Personal Area Network)** <br>
+        Jaringan super kecil yang ngubungin perangkat pribadi kayak HP, smartwatch, headset Bluetooth, dll. Biasanya jaraknya deket banget, cuma beberapa meter doang. <br><br>
+      
+        🔸 **VPN (Virtual Private Network)** <br>
+        Ini sebenernya bukan tipe jaringan fisik, tapi lebih ke metode buat bikin koneksi aman di atas jaringan publik. VPN bantu nyembunyiin identitas lu dan ngejaga data biar gak gampang dicuri. <br><br>
+      
+        🔸 **Internet & Intranet** <br>
+        Internet itu jaringan global, semua orang bisa akses. Intranet itu kebalikannya — jaringan internal yang cuma bisa diakses orang dalam, misalnya buat perusahaan atau organisasi. <br><br>
+      
+        Tiap jenis jaringan punya kelebihan dan kekurangannya masing-masing. Sebagai pejuang CyberX, penting buat lu ngerti karakteristik tiap jenis biar gak salah langkah pas audit, testing, atau pengamanan.
+      </p>    
+      <hr style="margin-top: 5px;">
+      <h3 id="sub3-2">3.2 Topologi Jaringan :</h3>
+      <p>
+        Topologi jaringan adalah cara atau bentuk susunan fisik dan logis dari sebuah jaringan komputer. Setiap topologi punya karakteristik, kelebihan, dan kekurangan masing-masing tergantung kebutuhan dan skala jaringan.
+      </p><br>
+    
+      <strong>1. Topologi Bus</strong><br>
+      Menggunakan satu kabel utama sebagai backbone tempat semua perangkat terhubung.<br>
+      ➕ Hemat kabel, instalasi sederhana. <br>
+      ➖ Sulit mendeteksi gangguan, performa menurun jika banyak perangkat.<br><br>
+    
+      <strong>2. Topologi Star</strong><br>
+      Semua perangkat terkoneksi ke satu perangkat pusat (biasanya switch/hub).<br>
+      ➕ Mudah dikelola, gangguan tidak memengaruhi perangkat lain. <br>
+      ➖ Ketergantungan pada perangkat pusat. Kalau switch mati, jaringan lumpuh.<br><br>
+    
+      <strong>3. Topologi Ring</strong><br>
+      Perangkat terhubung melingkar satu arah atau dua arah.<br>
+      ➕ Transfer data cepat dan stabil. <br>
+      ➖ Gangguan di satu titik bisa ganggu seluruh jaringan.<br><br>
+    
+      <strong>4. Topologi Mesh</strong><br>
+      Setiap perangkat saling terhubung langsung satu sama lain.<br>
+      ➕ Sangat andal, rute data fleksibel. <br>
+      ➖ Biaya tinggi, instalasi dan konfigurasi kompleks.<br><br>
+    
+      <strong>5. Topologi Tree</strong><br>
+      Gabungan dari topologi star dan bus, berbentuk seperti pohon bercabang.<br>
+      ➕ Cocok untuk jaringan skala besar. <br>
+      ➖ Kompleks dan perlu manajemen yang baik.<br><br>
+    
+      <p>
+        Memilih topologi yang tepat sangat penting demi efisiensi, kecepatan, dan keandalan jaringan. Tiap topologi punya tempatnya sendiri tergantung skenario penggunaan.
+      </p>
+      <hr style="margin-top: 5px;">
+      <h3 id="sub3-3">3.3 Protokol Dasar :</h3>
+      <p>
+        Protokol jaringan adalah aturan atau standar yang mengatur bagaimana data dikirim, diterima, dan diproses dalam jaringan. Tanpa protokol, perangkat tidak akan bisa "berkomunikasi" satu sama lain.
+      </p><br>
+    
+      <strong>1. TCP (Transmission Control Protocol)</strong><br>
+      Bertugas menjamin data sampai ke tujuan secara lengkap dan urut.<br>
+      ➕ Handal, ada sistem pengecekan kesalahan.<br>
+      ➖ Lebih lambat karena overhead verifikasi data.<br><br>
+    
+      <strong>2. UDP (User Datagram Protocol)</strong><br>
+      Kirim data tanpa verifikasi, cocok untuk real-time (game, video call).<br>
+      ➕ Cepat, ringan.<br>
+      ➖ Tidak menjamin data sampai dengan utuh.<br><br>
+    
+      <strong>3. IP (Internet Protocol)</strong><br>
+      Menentukan alamat tujuan data, seperti alamat rumah buat surat.<br>
+      ➕ Wajib ada, bagian dari pengiriman data.<br>
+      ➖ Tidak menjamin data sampai (butuh TCP untuk jaminan).<br><br>
+    
+      <strong>4. HTTP & HTTPS</strong><br>
+      Protokol buat akses web. HTTPS adalah versi aman dengan enkripsi.<br>
+      ➕ Digunakan di semua website modern.<br>
+      ➖ HTTP tidak aman untuk kirim data sensitif.<br><br>
+    
+      <strong>5. FTP (File Transfer Protocol)</strong><br>
+      Digunakan untuk transfer file antara client dan server.<br>
+      ➕ Cocok buat upload/download file besar.<br>
+      ➖ Bisa jadi target serangan jika tidak pakai versi aman (FTPS/SFTP).<br><br>
+    
+      <p>
+        Memahami protokol dasar adalah pondasi buat masuk lebih dalam ke dunia jaringan dan keamanan. Ini kayak bahasa yang dipakai antar perangkat biar bisa komunikasi lancar.
+      </p>
+    </article>
+
+    <article id="judul4">
+      <div class="image-slider">
+        <img src="https://arksolvers.com/wp-content/uploads/2024/05/Types-of-Cyber-Attacks.jpg" alt="img0" loading="lazy" class="slide-imgo" />
+      </div>
+      <h2>△ |Cyber Attack & Defense|</h2>
+      <p>
+        Kita bahas berbagai jenis serangan dari yang dasar sampe yang kompleks. Tapi bukan cuma cara nyerangnya, kita juga kupas cara nangkisnya. Karena hacker sejati harus bisa jadi attacker sekaligus defender.
+      </p>
+      <p>
+        Dunia cyber itu nggak cuma tentang jaringan dan sistem, tapi juga tentang ancaman dan cara bertahan. Serangan cyber (cyber attack) adalah segala bentuk upaya buat merusak, mencuri, atau mengganggu sistem komputer atau data. Di sisi lain, pertahanan cyber (cyber defense) adalah segala cara buat mencegah dan melindungi dari serangan tersebut.
+      </p><br>
+    
+      <strong>🛑 Jenis-Jenis Serangan Umum:</strong><br><br>
+    
+      <strong>1. Phishing</strong> - Menipu korban buat ngasih info sensitif lewat email atau situs palsu.<br>
+      <strong>2. Malware</strong> - Software berbahaya kayak virus, worm, trojan, ransomware, dll.<br>
+      <strong>3. DDoS (Distributed Denial of Service)</strong> - Ngebanjirin server dengan traffic biar down.<br>
+      <strong>4. MITM (Man in The Middle)</strong> - Menyadap komunikasi antar dua pihak tanpa mereka tahu.<br>
+      <strong>5. SQL Injection</strong> - Memanfaatkan celah input database buat akses atau hancurin data.<br><br>
+    
+      <strong>🛡️ Teknik Dasar Pertahanan:</strong><br><br>
+    
+      <strong>1. Firewall</strong> - Batasi dan filter lalu lintas jaringan berdasarkan aturan.<br>
+      <strong>2. Antivirus & Antimalware</strong> - Deteksi dan hapus software berbahaya.<br>
+      <strong>3. Enkripsi</strong> - Kunci data agar nggak bisa dibaca pihak tak berwenang.<br>
+      <strong>4. Multi-Factor Authentication (MFA)</strong> - Tambah lapisan keamanan saat login.<br>
+      <strong>5. Patch Management</strong> - Update software biar celah keamanan tertutup.<br><br>
+    
+      <p>
+        Untuk jadi defender sejati, lu harus paham cara attacker bekerja. Kayak main catur—lu harus tahu langkah lawan biar bisa ngelawan. Cyber security bukan soal alat mahal, tapi soal mindset, ketelitian, dan pengetahuan.
+      </p>
+      <hr style="margin-top: 5px;">
+      <h3 id="sub4-1">4.1 Pengantar Serangan Siber :</h3>
+      <p>
+        Dunia digital bukan tempat yang sepenuhnya aman. Di balik layar, ada banyak aktor ancaman 
+        yang setiap detiknya mencari celah untuk menyerang sistem, mencuri data, atau bahkan melumpuhkan jaringan 
+        sebuah organisasi. Inilah yang disebut sebagai <strong>serangan siber (cyber attack)</strong>.
+      </p>
+    
+      <p>
+        Serangan siber bisa datang dari berbagai arah dan dengan berbagai cara. Ada yang bersifat 
+        <em>technical</em> (seperti peretasan sistem dan injeksi kode), dan ada juga yang bersifat 
+        <em>psikologis</em> (seperti manipulasi sosial atau phishing). Pemahaman akan jenis-jenis serangan ini 
+        adalah langkah awal penting dalam membangun pertahanan yang solid.
+      </p>
+    
+      <p>
+        Selain itu, perlu juga diketahui bahwa pelaku serangan bisa berasal dari individu iseng, 
+        kelompok terorganisir, hingga negara. Mereka dikenal dengan istilah seperti <strong>script kiddies</strong>, 
+        <strong>hacktivist</strong>, <strong>cyber criminal</strong>, bahkan <strong>nation-state actor</strong>.
+      </p>
+    
+      <p>
+        Dengan memahami motivasi, teknik, dan pola serangan siber, kita bisa menempatkan diri 
+        bukan hanya sebagai pengguna, tapi sebagai penjaga sistem. Di bab ini, kita akan menyelami sisi gelap dunia digital,
+        tapi dengan tujuan untuk memahami, melindungi, dan melawan.
+      </p>
+    
+      <blockquote style="background:#1e1e1e;padding:10px;border-left:4px solid #ff4d4d;color:#eee;font-style:italic">
+        "Know your enemy and know yourself, and you can fight a hundred battles without disaster." — Sun Tzu
+      </blockquote>
+      <hr style="margin-top: 5px;">
+      <h3 id="sub4-2">4.2 Tahapan Cyber Attack (Cyber Kill Chain) :</h3>
+      <p>
+        Dalam dunia pertahanan siber, memahami pola pikir penyerang adalah kunci. Salah satu framework yang digunakan untuk menganalisis serangan adalah <strong>Cyber Kill Chain</strong>. Model ini menggambarkan tahapan-tahapan yang biasanya dilalui oleh pelaku serangan dari awal hingga akhir.
+      </p>
+    
+      <ol>
+        <li>
+          <strong>1. Reconnaissance (Pengintaian):</strong><br>
+          Penyerang mulai mengumpulkan informasi tentang target. Ini bisa berupa alamat IP, subdomain, port yang terbuka, atau informasi publik dari media sosial. Tools: <code>whois</code>, <code>nslookup</code>, <code>theHarvester</code>, <code>Shodan</code>.
+        </li><br>
+    
+        <li>
+          <strong>2. Weaponization (Persenjataan):</strong><br>
+          Penyerang membuat alat serangan, seperti malware, trojan, atau file exploit. Biasanya disesuaikan dengan informasi hasil rekonsiliasi.
+        </li><br>
+    
+        <li>
+          <strong>3. Delivery (Pengiriman):</strong><br>
+          Serangan dikirim ke target. Bisa lewat email phishing, link jebakan, USB berisi malware, atau situs web palsu.
+        </li><br>
+    
+        <li>
+          <strong>4. Exploitation (Eksploitasi):</strong><br>
+          File atau payload dijalankan oleh target, lalu celah sistem dimanfaatkan oleh penyerang untuk masuk.
+        </li><br>
+    
+        <li>
+          <strong>5. Installation (Instalasi):</strong><br>
+          Penyerang memasang backdoor, trojan, atau tool lainnya untuk tetap bisa mengakses sistem di kemudian hari.
+        </li><br>
+    
+        <li>
+          <strong>6. Command & Control (C2):</strong><br>
+          Penyerang menghubungkan sistem korban ke server pusat (C2) agar bisa dikendalikan dari jauh.
+        </li><br>
+    
+        <li>
+          <strong>7. Action on Objectives:</strong><br>
+          Penyerang mencapai tujuannya: mencuri data, mengenkripsi file (ransomware), memata-matai, atau merusak sistem.
+        </li>
+      </ol>
+    
+      <p>
+        Dengan memahami setiap tahap ini, defender bisa lebih sigap mencegah, mendeteksi, dan menghentikan serangan sebelum mencapai tahap akhir.
+      </p>
+    
+      <div style="background:#111;padding:10px;border-left:4px solid #00bfff;color:#ccc;font-style:italic">
+        🔁 Kill Chain bukan hanya untuk menyerang, tapi juga untuk memecah serangan. Gagalnya satu tahap = serangan batal total.
+      </div>
+      <hr style="margin-top: 5px;">
+      <h3 id="sub4-3">4.3 Teknik Pertahanan :</h3>
+      <p>
+        Dalam dunia digital yang penuh ancaman, teknik pertahanan cyber jadi kunci utama buat menjaga integritas, kerahasiaan, dan ketersediaan data. Tujuan utama pertahanan adalah mencegah serangan sebelum terjadi, mendeteksi aktivitas mencurigakan sedini mungkin, dan meminimalkan dampak saat serangan berhasil menembus sistem.
+      </p><br>
+    
+      <strong>1. Penggunaan Firewall</strong><br>
+      Firewall berfungsi sebagai penjaga gerbang jaringan. Ia menyaring lalu lintas masuk dan keluar berdasarkan aturan yang ditetapkan. Dengan konfigurasi yang tepat, firewall bisa menahan akses tak sah dan mencegah malware masuk dari jaringan luar.<br><br>
+    
+      <strong>2. Enkripsi Data</strong><br>
+      Enkripsi mengubah data menjadi bentuk yang nggak bisa dibaca tanpa kunci. Ini melindungi informasi sensitif meskipun data tersebut berhasil dicuri. Protokol seperti HTTPS, SSL/TLS, dan AES sering digunakan dalam enkripsi modern.<br><br>
+    
+      <strong>3. Multi-Factor Authentication (MFA)</strong><br>
+      MFA menambahkan lapisan keamanan ekstra dalam proses login. Selain username dan password, pengguna diminta memasukkan kode OTP, sidik jari, atau faktor lainnya. Ini bikin serangan brute-force atau pencurian password jadi nggak cukup buat bobol akun.<br><br>
+    
+      <strong>4. Patch dan Update Rutin</strong><br>
+      Sistem yang nggak diperbarui punya banyak celah keamanan. Serangan kayak WannaCry terjadi karena sistem belum dipatch. Update rutin menutup bug dan memperkuat sistem dari eksploitasi baru.<br><br>
+    
+      <strong>5. Monitoring dan Logging</strong><br>
+      Sistem pertahanan yang baik harus bisa memonitor aktivitas pengguna dan mencatat log untuk audit. Dari log ini, administrator bisa mendeteksi aktivitas mencurigakan, seperti login di jam aneh atau akses data masif tiba-tiba.<br><br>
+    
+      <strong>6. Segmentasi Jaringan</strong><br>
+      Dengan memisah jaringan internal ke beberapa segmen (misalnya: admin, user biasa, tamu), maka serangan yang berhasil masuk ke satu segmen tidak langsung bisa akses ke seluruh sistem. Ini bikin serangan jadi lebih terbatas dampaknya.<br><br>
+    
+      <strong>7. Pelatihan dan Kesadaran Pengguna</strong><br>
+      Manusia adalah celah paling lemah dalam sistem keamanan. Serangan phishing dan social engineering sering berhasil karena pengguna kurang edukasi. Maka dari itu, pelatihan keamanan berkala wajib dilakukan agar pengguna tahu cara menghindari jebakan.<br><br>
+    
+      <p>
+        Teknik pertahanan cyber bukan hanya soal alat, tapi juga soal strategi, kesadaran, dan respon cepat. Sistem terbaik sekalipun bisa ditembus jika nggak dijaga oleh orang-orang yang paham. Makanya, jadi defender itu butuh kombinasi teknis dan naluri keamanan yang tajam.
+      </p>
+      <hr style="margin-top: 5px;">
+      <h3 id="sub4-4">4.4 Tools Umum :</h3>
+      <p>
+        Dalam dunia cybersecurity, tools adalah senjata utama. Baik untuk ofensif maupun defensif, para profesional maupun pemula wajib ngerti fungsi dan kekuatan dari masing-masing tool. Berikut ini adalah kumpulan tool yang sering dipakai dalam praktik dunia nyata, lengkap dengan deskripsi mendalam.
+      </p><br>
+    
+      <strong>🔍 Nmap</strong><br>
+      Nmap (Network Mapper) adalah salah satu tool scanning paling populer. Digunakan untuk memetakan jaringan, mengidentifikasi host yang aktif, port terbuka, serta layanan yang berjalan. Cocok buat footprinting dan reconnaissance awal sebelum melakukan serangan atau audit sistem keamanan.<br><br>
+    
+      <strong>📡 Wireshark</strong><br>
+      Wireshark adalah network protocol analyzer yang menangkap paket data yang lewat di jaringan secara real-time. Cocok untuk menganalisa aktivitas mencurigakan, sniffing password, atau debugging protokol jaringan.<br><br>
+    
+      <strong>💥 Metasploit Framework</strong><br>
+      Metasploit adalah framework eksploitasi yang memungkinkan ethical hacker untuk menguji kerentanan sistem dengan mudah. Memiliki ribuan modul exploit, payload, dan scanner yang terus diperbarui.<br><br>
+    
+      <strong>🛡️ Burp Suite</strong><br>
+      Burp Suite adalah salah satu tool utama dalam pentesting web. Dengan fitur proxy, repeater, scanner, dan intruder, tool ini memungkinkan lu untuk memodifikasi permintaan HTTP/S dan menemukan celah keamanan seperti XSS atau SQLi secara real-time.<br><br>
+    
+      <strong>🔎 Nikto</strong><br>
+      Nikto adalah scanner web server open-source yang mendeteksi lebih dari 6000 file atau program berbahaya, serta konfigurasi server yang rentan. Tool ini sering digunakan untuk audit awal sistem berbasis web.<br><br>
+    
+      <strong>🧠 John the Ripper</strong><br>
+      JTR adalah tool populer untuk cracking password. Mendukung banyak format hash dan teknik brute-force maupun dictionary attack. Sering dipakai dalam uji kekuatan password internal perusahaan.<br><br>
+    
+      <strong>📶 Aircrack-ng</strong><br>
+      Aircrack-ng adalah paket tool untuk auditing keamanan Wi-Fi. Dengan tool ini, pengguna bisa menangkap handshake WPA/WPA2, menganalisis enkripsi, dan mencoba mendekripsi password jaringan nirkabel.<br><br>
+    
+      <strong>🔓 Hydra</strong><br>
+      THC-Hydra adalah tool brute-force yang cepat dan fleksibel untuk berbagai protokol login, seperti SSH, FTP, Telnet, dan HTTP Auth. Ideal untuk uji kekuatan autentikasi login pada sistem target.<br><br>
+    
+      <strong>🗂️ SQLmap</strong><br>
+      SQLmap adalah tool otomatis untuk mendeteksi dan mengeksploitasi celah SQL Injection. SQLmap mendukung berbagai jenis database dan mampu mengekstrak data, mengambil hash password, hingga akses ke shell sistem.<br><br>
+    
+      <strong>📬 Netcat</strong><br>
+      Netcat (nc) adalah tool multifungsi yang digunakan untuk membuat koneksi TCP/UDP, membuka port, mengirim data, bahkan bikin backdoor sederhana. Biasa disebut sebagai "pisau Swiss-nya jaringan".<br><br>
+    
+      <strong>🔍 Autopsy</strong><br>
+      Autopsy adalah tool GUI digital forensic yang digunakan untuk menganalisa hard disk, file sistem, serta log. Sering digunakan untuk investigasi forensik komputer atau insiden breach data.<br><br>
+    
+      <strong>⚡ Hashcat</strong><br>
+      Hashcat adalah salah satu tool paling kuat untuk cracking hash password. Menggunakan GPU acceleration untuk kecepatan luar biasa dalam membongkar password, cocok untuk audit keamanan internal.<br><br>
+    
+      <strong>🕵️ Maltego</strong><br>
+      Maltego adalah tool OSINT (Open Source Intelligence) yang memvisualisasikan relasi antara domain, IP, orang, perusahaan, dan lainnya. Berguna untuk investigasi siber dan identifikasi koneksi tersembunyi.<br><br>
+    
+      <strong>💽 FTK Imager</strong><br>
+      FTK Imager adalah tool imaging forensik yang bisa mengambil snapshot digital dari drive, termasuk file yang sudah dihapus. Digunakan dalam investigasi kriminal digital dan pemulihan data penting.<br><br>
+    
+      <strong>🚨 OSSEC</strong><br>
+      OSSEC adalah sistem IDS (Intrusion Detection System) berbasis host yang memonitor file sistem, log, dan perubahan file. Dapat mengirimkan alert saat ada potensi ancaman, cocok untuk sistem server dan endpoint.<br><br>
+    
+      <p>
+        Semua tools di atas memiliki potensi besar, tapi harus digunakan dengan etika dan tujuan yang benar. Ingat, menjadi bagian dari dunia cyber bukan hanya soal keahlian teknis, tapi juga soal tanggung jawab digital.
+      </p>
+      <hr style="margin-top: 5px;">
+      <h3 id="sub4-5">4.5 Incident Response Plan (IRP) :</h2>
+      <p>
+        Tidak peduli seberapa kuat sistem keamanan yang kita bangun, serangan tetap bisa terjadi. Di sinilah pentingnya <strong>Incident Response Plan (IRP)</strong> — sebuah strategi untuk merespons insiden siber secara cepat, tepat, dan terstruktur.
+      </p>
+    
+      <p>
+        IRP membantu organisasi untuk meminimalkan kerugian, menjaga reputasi, dan mencegah serangan lanjutan. Rencana ini tidak hanya berlaku bagi perusahaan besar, tapi juga relevan untuk tim kecil hingga individu di dunia cyber.
+      </p>
+    
+      <h4>Tahapan dalam Incident Response</h4>
+      <ol>
+        <li>
+          <strong>1. Preparation (Persiapan):</strong><br>
+          Membuat kebijakan keamanan, menetapkan tim respons insiden, pelatihan, dan simulasi insiden. Ini adalah pondasi IRP.
+        </li><br>
+    
+        <li>
+          <strong>2. Identification (Identifikasi):</strong><br>
+          Mendeteksi insiden melalui alert, log, atau laporan pengguna. Menentukan apakah benar terjadi pelanggaran keamanan.
+        </li><br>
+    
+        <li>
+          <strong>3. Containment (Pengendalian):</strong><br>
+          Mengisolasi sistem yang terdampak agar serangan tidak menyebar. Bisa jangka pendek (disconnect jaringan) atau jangka panjang (migrasi sistem).
+        </li><br>
+    
+        <li>
+          <strong>4. Eradication (Pembersihan):</strong><br>
+          Menghapus malware, menutup celah keamanan, menghapus user tidak sah, dan memperbaiki sistem.
+        </li><br>
+    
+        <li>
+          <strong>5. Recovery (Pemulihan):</strong><br>
+          Mengembalikan sistem ke kondisi normal. Monitoring ketat dilakukan untuk memastikan serangan tidak berulang.
+        </li><br>
+    
+        <li>
+          <strong>6. Lessons Learned (Evaluasi):</strong><br>
+          Setelah insiden ditangani, seluruh tim melakukan analisis menyeluruh. Apa yang bisa diperbaiki? Apakah IRP sudah efektif?
+        </li>
+      </ol>
+    
+      <p>
+        Setiap langkah dalam IRP harus terdokumentasi dengan baik. Log, bukti, dan timeline kejadian sangat penting untuk investigasi lebih lanjut dan forensik digital.
+      </p>
+    
+      <div style="background:#1a1a1a;border-left:4px solid #f39c12;padding:10px;color:#eee">
+        💡 <em>Catatan:</em> Latihan simulasi insiden (cyber drill) secara berkala adalah bagian dari IRP yang sering diremehkan tapi sangat penting.
+      </div>
+    </article>
+
+    <article id="judul5">
+      <div class="image-slider">
+        <img src="https://www.logicalincrements.com/assets/img/articles/build-pc-windows-apple-mac-linux-operating-system-os/macos-vs-windows-vs-linux-operating-system-os-guide-cover-image.png" alt="img0" loading="lazy" class="slide-imgo" />
+      </div>
+      <h2>△ |Apa itu Sistem Operasi|</h2>
+    
+      <p>
+        Sistem Operasi (Operating System / OS) adalah fondasi dari setiap perangkat digital. Dalam konteks keamanan siber, pemahaman mendalam terhadap sistem operasi bukan lagi pilihan, tapi keharusan. Baik kamu berada di sisi pertahanan (defensive) maupun penyerangan (offensive), mengenal karakteristik tiap OS akan memperkuat strategi kamu.
+      </p>
+    
+      <p>
+        Bab ini akan membahas tiga OS utama yang digunakan di dunia: <strong>Windows</strong>, <strong>Linux</strong>, dan <strong>macOS</strong>. Setiap OS memiliki struktur unik, pendekatan keamanan berbeda, dan juga kelemahannya masing-masing. Pengetahuan ini penting untuk:
+      </p>
+    
+      <ul>
+        <li>Melakukan <em>penetration testing</em> dan <em>exploit development</em></li>
+        <li>Menangani <em>incident response</em> dan <em>digital forensics</em></li>
+        <li>Membangun sistem yang aman dan tahan terhadap serangan</li>
+        <li>Melakukan <em>privilege escalation</em> dan bypass protection layer</li>
+      </ul>
+    
+      <p>
+        Setiap sub-bab nantinya akan mengulas satu per satu dari ketiga sistem operasi ini, dilengkapi dengan teknik, tools, dan studi kasus yang sering ditemukan di lapangan. Mari kita mulai memahami medan tempur sesungguhnya: sistem operasi itu sendiri.
+      </p>
+    
+      <div style="background:#1e1e1e;padding:12px;border-left:4px solid #29b6f6;color:#ccc;margin-top:20px">
+        💻 <strong>Catatan:</strong> Sistem Operasi bukan sekadar software dasar, tapi juga medan pertempuran dalam dunia cyber.
+      </div>
+      <hr style="margin-top: 5px;">
+      <h3 id="sub5-1">5.1 Sistem Operasi Windows :</h3>
+      <p>
+        Windows adalah sistem operasi yang paling banyak digunakan di dunia, khususnya di lingkungan bisnis dan personal. Karena dominasi pasarnya, Windows sering menjadi target utama serangan siber.  
+      </p>
+    
+      <h4>Arsitektur Windows</h4>
+      <p>
+        Windows terdiri dari beberapa komponen utama: kernel, user mode, sistem file, dan registry. Kernel Windows bertanggung jawab atas pengelolaan hardware dan layanan sistem yang vital. Sedangkan registry adalah database yang menyimpan konfigurasi dan preferensi sistem serta aplikasi.
+      </p>
+    
+      <h4>Fitur Keamanan Windows</h4>
+      <ul>
+        <li><strong>Windows Defender:</strong> Antivirus bawaan yang terus dikembangkan oleh Microsoft.</li>
+        <li><strong>UAC (User Account Control):</strong> Mencegah aplikasi tidak sah menjalankan tugas administratif tanpa izin pengguna.</li>
+        <li><strong>Windows Firewall:</strong> Mengontrol akses jaringan masuk dan keluar.</li>
+        <li><strong>BitLocker:</strong> Enkripsi disk untuk melindungi data saat perangkat hilang atau dicuri.</li>
+      </ul>
+    
+      <h4>Kerentanan Umum di Windows</h4>
+      <p>
+        Karena kompleksitas dan popularitasnya, Windows punya beberapa vektor serangan yang sering dimanfaatkan oleh pelaku kejahatan siber, seperti:
+      </p>
+      <ul>
+        <li>Eksploitasi kerentanan pada <em>Remote Desktop Protocol (RDP)</em>.</li>
+        <li>Serangan melalui <em>phishing</em> yang memancing user menjalankan malware.</li>
+        <li>Penggunaan malware yang memanfaatkan celah registry dan sistem file.</li>
+        <li>Privilege escalation melalui <em>DLL hijacking</em> atau <em>token manipulation</em>.</li>
+      </ul>
+    
+      <h4>Tools Penting di Windows untuk Cybersecurity</h4>
+      <ul>
+        <li><strong>PowerShell:</strong> Shell scripting powerful untuk administrasi dan pentesting.</li>
+        <li><strong>Sysinternals Suite:</strong> Koleksi tool Microsoft untuk debugging dan monitoring sistem.</li>
+        <li><strong>Metasploit Framework:</strong> Platform exploit development dan testing (bisa dijalankan juga di Windows).</li>
+      </ul>
+    
+      <p>
+        Memahami cara kerja Windows dan vektor serangannya membantu kita menyiapkan pertahanan yang tepat dan juga melakukan eksploitasi yang efektif dalam konteks ethical hacking.
+      </p>
+      <hr style="margin-top: 5px;">
+      <h3 id="sub5-2">5.2 Sistem Operasi macOS :</h2>
+      <p>
+        macOS adalah sistem operasi buatan Apple yang dikenal dengan antarmuka yang elegan dan kestabilan tinggi. Meski populer di kalangan kreator dan profesional, macOS juga menarik perhatian para peneliti keamanan karena arsitekturnya yang unik dan proteksi ketat yang diterapkan.
+      </p>
+    
+      <h4>Arsitektur macOS</h4>
+      <p>
+        macOS berbasis pada Darwin, yang menggabungkan kernel XNU (hybrid antara Mach dan BSD). OS ini menggabungkan lingkungan Unix yang stabil dengan fitur modern dan antarmuka grafis yang user-friendly.
+      </p>
+    
+      <h4>Fitur Keamanan macOS</h4>
+      <ul>
+        <li><strong>System Integrity Protection (SIP):</strong> Membatasi akses root ke bagian-bagian sistem kritikal untuk mencegah modifikasi yang tidak sah.</li>
+        <li><strong>Gatekeeper:</strong> Melindungi pengguna dari aplikasi berbahaya dengan memverifikasi sumber aplikasi yang diunduh.</li>
+        <li><strong>XProtect:</strong> Sistem antivirus built-in yang secara otomatis mendeteksi dan menghapus malware umum.</li>
+        <li><strong>Sandboxing:</strong> Membatasi kemampuan aplikasi agar tidak bisa mengakses data atau sistem yang tidak diperbolehkan.</li>
+      </ul>
+    
+      <h4>Kerentanan dan Vektor Serangan di macOS</h4>
+      <p>
+        Walaupun terkenal aman, macOS tidak kebal dari serangan. Beberapa vektor serangan umum termasuk:
+      </p>
+      <ul>
+        <li>Eksploitasi kelemahan di aplikasi pihak ketiga.</li>
+        <li>Phishing dan social engineering untuk mencuri kredensial pengguna.</li>
+        <li>Serangan yang menargetkan kernel extensions (kexts) untuk privilege escalation.</li>
+        <li>Penggunaan malware khusus macOS yang semakin berkembang seiring peningkatan pengguna.</li>
+      </ul>
+    
+      <h4>Tools dan Teknik Cybersecurity di macOS</h4>
+      <ul>
+        <li><strong>Terminal & Zsh:</strong> Terminal powerful untuk scripting dan manajemen sistem.</li>
+        <li><strong>Homebrew:</strong> Package manager yang memudahkan instalasi tools keamanan dan pentesting.</li>
+        <li><strong>Little Snitch:</strong> Firewall aplikasi yang memonitor koneksi keluar masuk secara real-time.</li>
+        <li><strong>Metasploit dan Wireshark:</strong> Tools umum yang juga tersedia dan sering dipakai di macOS untuk pentesting dan analisis jaringan.</li>
+      </ul>
+    
+      <p>
+        Memahami macOS dari sisi arsitektur dan keamanan membantu kita mengenali titik lemah yang bisa dieksploitasi sekaligus cara memperkuat sistem agar lebih tahan terhadap serangan.
+      </p>
+      <hr style="margin-top: 5px;">
+      <h3 id="sub5-3">5.3 Sistem Operasi Linux :</h3>
+      <p>
+        Linux adalah sistem operasi open-source yang terkenal dengan kestabilan, keamanan, dan fleksibilitasnya. Karena sifatnya yang open dan modular, Linux jadi favorit para profesional keamanan siber, hacker, dan sysadmin untuk eksplorasi dan pengembangan.
+      </p>
+    
+      <h4>Arsitektur Linux</h4>
+      <p>
+        Linux menggunakan kernel monolitik yang mengatur hardware dan menyediakan layanan dasar seperti manajemen proses, memori, dan sistem file. Di atas kernel, ada user space yang berisi shell, daemon, dan aplikasi yang berinteraksi dengan kernel.
+      </p>
+    
+      <h4>Sistem Izin dan Keamanan Linux</h4>
+      <ul>
+        <li><strong>Permission File System:</strong> Linux membatasi akses ke file dan direktori berdasarkan user, group, dan permission (read, write, execute).</li>
+        <li><strong>SUID & SGID:</strong> Mekanisme untuk menjalankan program dengan hak akses user atau group tertentu.</li>
+        <li><strong>SELinux dan AppArmor:</strong> Modul keamanan yang membatasi operasi program secara granular.</li>
+        <li><strong>Firewall (iptables, nftables):</strong> Pengaturan aturan jaringan yang sangat fleksibel.</li>
+      </ul>
+    
+      <h4>Vektor Serangan Umum di Linux</h4>
+      <p>
+        Meskipun terkenal aman, Linux tetap punya titik lemah yang sering jadi sasaran serangan:
+      </p>
+      <ul>
+        <li>Serangan privilege escalation lewat konfigurasi SUID yang salah.</li>
+        <li>Eksploitasi kerentanan pada daemon dan layanan yang berjalan dengan hak istimewa.</li>
+        <li>Serangan brute-force pada SSH.</li>
+        <li>Backdoor dan rootkit yang menyusup di kernel atau user space.</li>
+      </ul>
+    
+      <h4>Tools Penting untuk Linux di Dunia Cyber</h4>
+      <ul>
+        <li><strong>Bash & Zsh:</strong> Shell scripting untuk otomatisasi dan eksplorasi.</li>
+        <li><strong>nmap & Wireshark:</strong> Tools untuk scanning dan analisis jaringan.</li>
+        <li><strong>Metasploit Framework:</strong> Framework eksploitasi yang kompatibel di Linux.</li>
+        <li><strong>John the Ripper & Hashcat:</strong> Tools cracking password.</li>
+        <li><strong>iptables & fail2ban:</strong> Pengaturan firewall dan proteksi terhadap serangan brute force.</li>
+      </ul>
+    
+      <p>
+        Dengan memahami Linux dari dasar sampai teknik eksploitasi yang umum, lu bisa memaksimalkan kemampuan di dunia cybersecurity, baik untuk membangun pertahanan atau melakukan penetration testing.
+      </p>
+    </article>  
+
+    <article id="judul6">
+      <div class="image-slider">
+        <img src="https://wallpapertag.com/wallpaper/full/d/2/7/927585-linux-wallpaper-hd-2560x1600-for-tablet.jpg" alt="img0" loading="lazy" class="slide-imgo" />
+      </div>
+        <h2>△ |Pengantar Linux|</h2>
+        <p>
+          Di dunia cyber security, <strong>Linux bukan cuma sistem operasi</strong>, tapi senjata utama. 
+          Linux dipakai di banyak server, sistem embedded, dan bahkan tools-tools hacker kelas dunia. 
+          Maka dari itu, penguasaan Linux jadi <em>mandatory</em> buat siapa pun yang pengin masuk ke dunia <strong>cyber operations</strong>.
+        </p>
+        <p>
+          Bab ini bakal ngebawa lu dari <strong>nol</strong> sampai ngerti gimana cara ngoperasikan Linux sebagai <em>daily weapon</em>. 
+          Lu bakal belajar dari yang dasar banget, kayak command line, sampai ke penggunaan tools security yang powerful.
+        </p>
+        <p>
+          Bukan cuma itu, lu juga bakal tahu <strong>gimana struktur sistem Linux</strong>, gimana hak akses bekerja, dan kenapa 
+          file permission itu penting banget dalam konteks keamanan.
+        </p>
+        <hr style="margin-top: 5px;">
+        <h3 id="sub6-1">6.1 Sejarah dan Evolusi Linux :</h3>
+        <p>
+          Linux pertama kali dikembangkan oleh <strong>Linus Torvalds</strong> pada tahun 1991 sebagai proyek hobi. Ia terinspirasi oleh sistem operasi UNIX dan ingin membuat kernel sendiri yang gratis dan dapat dimodifikasi oleh siapa saja. Linux kemudian menjadi bagian penting dalam dunia open-source, didukung oleh komunitas global yang besar dan aktif.
+        </p>
+      
+        <h4>Awal Mula: Dari MINIX ke Linux</h4>
+        <p>
+          Linus awalnya menggunakan sistem operasi MINIX untuk belajar, namun merasa sistem tersebut terlalu terbatas. Dari situlah ia mulai menulis kode kernel Linux dan merilisnya secara publik. Rilis awal Linux hanya bisa menjalankan Bash dan GCC, tapi menjadi fondasi dari sistem yang kini digunakan di server, desktop, mobile, hingga IoT.
+        </p>
+      
+        <ul>
+          <li><strong>1991:</strong> Linux versi 0.01 dirilis, masih sangat sederhana.</li>
+          <li><strong>1992:</strong> Linux resmi dirilis dengan lisensi GNU General Public License (GPL).</li>
+          <li><strong>1994:</strong> Linux 1.0 diluncurkan, mendukung jaringan TCP/IP.</li>
+          <li><strong>2000-an:</strong> Distribusi seperti Ubuntu dan CentOS mulai populer.</li>
+          <li><strong>Sekarang:</strong> Linux mendominasi server, cloud, superkomputer, dan bahkan Android menggunakan kernel Linux.</li>
+        </ul>
+      
+        <p>
+          Linux dibangun dengan filosofi <strong>open-source</strong>, yang artinya siapa saja bebas mempelajari, memodifikasi, dan menyebarluaskan sistem ini. Kolaborasi dan transparansi menjadi kekuatan utamanya. Model ini juga memunculkan banyak <em>distribusi Linux</em> (distro) yang disesuaikan untuk berbagai keperluan.
+        </p>
+      
+        <p>
+          Karena stabilitas dan fleksibilitasnya, Linux menjadi platform utama dalam bidang cybersecurity. Tools seperti <strong>Metasploit, Nmap, Wireshark</strong>, dan <strong>Aircrack-ng</strong> dikembangkan dan berjalan optimal di sistem Linux. Bahkan, distribusi khusus seperti <strong>Kali Linux</strong> dan <strong>Parrot OS</strong> diciptakan untuk ethical hacking dan digital forensics.
+        </p>
+      
+        <p>
+          Sejarah Linux bukan hanya tentang sistem operasi, tapi juga simbol kebebasan digital dan kekuatan kolaborasi komunitas. Dari satu orang di Finlandia ke miliaran device di seluruh dunia — Linux telah merevolusi dunia teknologi.
+        </p>
+        <hr style="margin-top: 5px;">
+        <h3 id="sub6-2">6.2 Konsep Open-Source & GNU/Linux :</h3>
+        <p>
+          Salah satu fondasi utama dari Linux adalah konsep <strong>open-source</strong>. Artinya, kode sumber Linux tersedia secara bebas untuk dipelajari, dimodifikasi, dan didistribusikan ulang oleh siapa saja. Konsep ini berbeda jauh dari software komersial tertutup (closed-source) seperti Windows atau macOS yang tidak memberikan akses ke kode internalnya.
+        </p>
+      
+        <h4>Apa Itu Open-Source?</h4>
+        <p>
+          Open-source adalah model pengembangan perangkat lunak yang terbuka. Siapa pun bisa berkontribusi dalam pengembangan, memberikan feedback, memperbaiki bug, atau bahkan membuat versi turunan (fork). Lisensi seperti <strong>GPL (GNU General Public License)</strong> menjamin bahwa kebebasan ini tetap terjaga.
+        </p>
+      
+        <h4>GNU dan Peranannya</h4>
+        <p>
+          Linux sebagai kernel hanyalah bagian dari keseluruhan sistem operasi. Sebagian besar perintah dan utilitas dasar yang digunakan dalam sistem Linux berasal dari proyek <strong>GNU</strong> yang dibuat oleh Richard Stallman. Karena itu, banyak orang menyebut Linux secara lengkap sebagai <strong>GNU/Linux</strong>.
+        </p>
+      
+        <ul>
+          <li><strong>GNU:</strong> Koleksi tools dan software seperti bash, gcc, grep, ls, dan lainnya.</li>
+          <li><strong>Linux Kernel:</strong> Jantung dari sistem operasi yang mengatur hardware dan proses.</li>
+        </ul>
+      
+        <p>
+          Dalam keamanan siber, transparansi adalah kunci. Software open-source memungkinkan analis dan hacker etis untuk mengaudit sistem, memahami cara kerja internalnya, dan mencari kelemahan. Ini memberi kepercayaan tinggi karena kode bisa diperiksa publik, bukan tersembunyi di balik perusahaan besar.
+        </p>
+      
+        <p>
+          Salah satu kekuatan Linux adalah komunitas globalnya. Ribuan kontributor dari berbagai negara terlibat dalam menjaga dan mengembangkan kernel Linux dan proyek open-source lainnya. Forum, mailing list, dan platform seperti GitHub jadi tempat utama bertukar ilmu dan pengembangan bersama.
+        </p>
+      
+        <p>
+          Open-source bukan cuma model pengembangan, tapi juga gerakan yang mendukung <strong>kebebasan digital</strong>. Di dunia cybersecurity, di mana kepercayaan dan kontrol sangat krusial, model ini jadi fondasi yang kuat dan transparan.
+        </p>
+        <hr style="margin-top: 5px;">
+        <h3 id="sub6-3">6.3 Struktur Sistem Operasi Linux :</h2>
+        <p>
+          Linux dibangun dengan arsitektur yang modular dan efisien. Struktur ini terdiri dari beberapa komponen utama yang saling terhubung, mulai dari kernel hingga aplikasi yang dijalankan pengguna. Memahami struktur sistem Linux penting bagi siapa saja yang ingin mendalami sistem operasi ini — terutama di bidang cybersecurity, karena banyak tools langsung berinteraksi dengan sistem inti.
+        </p>
+      
+        <h4>1. Kernel</h4>
+        <p>
+          Kernel adalah inti dari Linux. Ia bertanggung jawab untuk mengatur komunikasi antara perangkat keras dan perangkat lunak. Kernel menangani manajemen memori, proses, perangkat I/O, dan sistem file. Kernel Linux bersifat monolitik, tapi bisa dimodifikasi melalui modul.
+        </p>
+      
+        <h4>2. System Libraries</h4>
+        <p>
+          Libraries seperti <code>glibc</code> menyediakan antarmuka bagi aplikasi untuk berkomunikasi dengan kernel tanpa harus berinteraksi langsung. Ini membuat pengembangan software lebih fleksibel dan aman.
+        </p>
+      
+        <h4>3. System Utilities</h4>
+        <p>
+          Utilities adalah program kecil untuk menjalankan fungsi dasar sistem, seperti <code>ls</code>, <code>cp</code>, <code>mkdir</code>, dan lainnya. Tools ini jadi alat utama dalam penggunaan Linux secara CLI (Command Line Interface).
+        </p>
+      
+        <h4>4. Shell</h4>
+        <p>
+          Shell bertugas sebagai antarmuka antara pengguna dan sistem. Shell yang paling populer adalah <code>Bash</code>, tapi ada juga Zsh, Fish, dll. Di sinilah perintah dieksekusi dan script dijalankan.
+        </p>
+      
+        <h4>5. File System Hierarchy (FHS)</h4>
+        <p>
+          Linux menggunakan struktur direktori yang konsisten dan hierarkis. Beberapa direktori penting antara lain:
+        </p>
+        <ul>
+          <li><code>/bin</code> – Berisi binary system yang penting</li>
+          <li><code>/etc</code> – File konfigurasi sistem</li>
+          <li><code>/home</code> – Direktori pengguna</li>
+          <li><code>/var</code> – File log dan variabel sistem</li>
+          <li><code>/usr</code> – Aplikasi dan library tambahan</li>
+          <li><code>/root</code> – Home directory untuk user root</li>
+        </ul>
+
+        <p>
+          Linux memisahkan antara <strong>user space</strong> dan <strong>kernel space</strong> demi keamanan dan stabilitas. Proses pengguna berjalan di user space dan hanya bisa mengakses kernel lewat system call.
+        </p>
+      
+        <p>
+          Dengan memahami struktur ini, lo bisa lebih gampang troubleshooting, menyusun script, atau bahkan nyusun serangan (ethical ya bro 😏) yang memahami cara kerja sistem dari dalam.
+        </p>
+        <hr style="margin-top: 5px;">
+        <h3 id="sub6-4">6.4 Distribusi Linux Populer :</h2>
+        <p>
+          Linux punya banyak varian distro, masing-masing dengan keunggulannya sendiri. Berikut beberapa yang paling populer, lengkap dengan gambarnya biar makin ngena di kepala:
+        </p>
+      
+        <div class="distro-list">
+          <div class="distro">
+            <img src="data:image/png;base64,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" alt="Ubuntu Logo">
+            <h4>Ubuntu</h4>
+            <p>
+              Salah satu distro paling ramah pengguna. Cocok buat pemula yang baru migrasi dari Windows. Dukungan komunitasnya luas dan stabil.
+            </p>
+          </div>
+      
+          <div class="distro">
+            <img src="data:image/png;base64,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" alt="Debian Logo">
+            <h4>Debian</h4>
+            <p>
+              Dikenal stabil dan jadi basis banyak distro lain, seperti Ubuntu. Ideal buat server dan environment yang butuh kestabilan tinggi.
+            </p>
+          </div>
+      
+          <div class="distro">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcx9PaAKbcRn0lH-FFb9BQzVUown1xu07eGA&s" alt="Fedora Logo">
+            <h4>Fedora</h4>
+            <p>
+              Distro cutting-edge dari Red Hat. Cocok buat pengguna lanjutan dan pengembang yang suka fitur terbaru.
+            </p>
+          </div>
+      
+          <div class="distro">
+            <img src="data:image/png;base64,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" alt="Arch Linux Logo">
+            <h4>Arch Linux</h4>
+            <p>
+              Distro untuk yang suka ngoprek dan belajar. Instalasi manual, tapi kasih pemahaman mendalam soal Linux.
+            </p>
+          </div>
+      
+          <div class="distro">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAhFBMVEX///8AAAD5+fnr6+v6+vri4uLl5eWenp7y8vLR0dHIyMj29vbx8fG4uLjV1dXb29uurq6mpqZLS0uFhYU7OztERESLi4uXl5fCwsKPj49oaGhTU1MYGBh7e3vJyckoKChlZWURERE9PT0xMTF9fX0hISFxcXFcXFwmJiYLCwtmZmZXV1emgVszAAAJKElEQVR4nO2d17qiMBCAQUCkN6VjA+G4vv/7LV1ArCQS8+W/2CuNmZNkMi2zFEUgEAgEAoFAIBAIBAKBQCAQCAQCgfATLFbMkqtZMvKKnXtC05A5zdUN3kqzIKYfsNtk/1Kb15Utx0hzT/odVouVvJIKFosFu8iXj1MF0VUMx7OSvRkfRsU97MzUM1xBnnv6QGAZTtQNy7+MLnGcWbq4XMw9SWAsBcWLNqdbQU++42o/fl67SEvXiMyRBU11DZ/lzGEE3TbDG5WUKMu5ZwYWWTDSG32U8drc8wKMJPD74fH8p2O2lvlqut7gcJ5Sd+5JgUdwgr6UewWPW7OH4PXvzkDBSsNWyEraX0kMt2u+lFZP+djYKZ4CzVl3ZNwoc88HCku+I+RZx8i067Dkr9v1F5eRXUgVj5ZHbRQP+rYOowmuzjt2mpnHY3wKw/Dcrk/4F8fxenOJPIc3XJXrXYQL/Vh8hptr4s+QNVe3/K7aeI1NFvH6tooKSIiuIefy0fHwtmgDwsASqOI0bueWpwuzNdLNVNGumJRFo6NploodjE4zjM3Ush1Dd7dbQVW1Ihgn5TYZK63kIkKnqcLW1R07yY43oYDFNv+Hn1s0ilqJzmUwtbPpW7lMGiO/d5vJjKrott/sA4XK/0khTftFlkrU8dl3m9QzRBWAa7DQXMf/y6iMptfTR/sURonafVUE0MBHRSVKyccGPeprMG5UibaJeBfijVXcFyq84e/AutEh/+E4MrawXNUVx6lCjlps0y+rGi43i897XmBgDJ7rGT7Kus4w6+bbBMZP3UGMdnt+CyMJoSmeH5/pG0pt+qWgBuMavAth5SRNj453L/2M8mlaB/+rI3AcBD+NUayH6avi0hce3RdI+44qn43syoa/wE8T29F1hgofGN/5tQlFIUxmaWTjcm0iR99q/Ul7NL1/MJboKaitpJiMpKLM5K7FsKSfeFCcFaETsmKMG/N8nRhPrh7z6YWxSgIR4Cw/RvMG/vDaUl7JrRWWm/HkM5J9+o7GvY9qH7rChRkvvHx86Gf7tGCRfOlWGYWzu0nDMFLeU4B28a3nR40JZvKWGaO7OfcfZNCY8psvnDThEH4/5qF00mdrR/hskEo9RS+YiwZtflWvctZVPH9Czkysx0gVjeOW8iNJJZ/2Pv6dd1HaoFRoTdw8f8M7ZrdPDHdcEW9p+sOt8h6S09hkJ2d6xFO/MRHqfZ8aHfe7ESylU+hmjua3Rw9IAEC9I2FJZtRHr7XQty/ppQls69Bb6AA69fYjAQtivrh/rpeFZNIWmJ8eQ6kdogRUfGW5eyZgwVGnLnS1OQtpHTqG5HXU8gHMUd87gzeEQe4wF5RWbO5XwsiTK+WfOzbABTrY/Y0km8tlc29Z91ThjJSqTY7B3xuVfCnI6J/c87RMr1PtJwuKfZvaWnO5CRRUn9jXawoKMS5PA1A9rXXnrq9uPyCpN860xYSVyuGohI5HvvPpXIo/pw8419cRMHuwM4Tk0JPxXNnp+Uryr1jsLyEVKWkHtPJatnM+Pdv5QtJfyENuIhZOpQFIRC/fnuAVl3TdeK98XPR7MrpUSEulJp6+scTzwz30Ma1X8qpnu9C7sclLUGocY7KIud+ZQnFY+Gaq71jtatRbyLQaZ5KIDm3BCboz1+32Fgv+PBTRn2DBabEHq4iwuQSc97+qdGoJzGl/f8eGViTZXBTBZ9/uaB2DT4L4Mz3BGRAj6s0SfvoTTCe8kBN/MgYLM2PQnMIJ2VHW6Yo4dzT1hkaRThqENToiolZ0vP5YzfRg+1oVIZpNOvUiaiU0D4jVx+lTFGmXRkLHpXcA5gWOFJR6aFJdO+oCM3LzPrXfOz1O18SS6Z2IlD5dVbM6AxjKa1XNea7qqjFqgwZIIY14TXuhUsdJVTlRcApeaWI9ITpVDfVNDSxU5jYRq++XyN3BA3PfdxD/JluBQEmAS9j+1TZolP6ngHdpiVqrHB+Fso1awgjwsG1k1efBhVE/IwVltA1oc1izv3CwGlMLNJWS9oGP+zaNdwi+klUHYu1OR4G3mRw0vKgmDGVDGBuNIr9FYyzPPRF4NAFPZKws4DSqBrHgCkC45uLCsPdATZNEQiryAJQ20omGoQyBaxhw7plAow3Jo+LRAecarUbCBoHBtRTqp5q9vUNbDRTjKuK11uSAq4jXfXpAw1wGT6euAqFgLlA6j+B9THdqt0EDCq45BLrNzkI8t2q/gNbDUeXwPRHpP09AreZgMurNY9qNpQt4LWYyFLHiHIbhX3w0L3s/Krr5ihwzdyj7Y7SR1qd3OAUW76o/uJGF8afRdzkH1s/1fl1aDx6332FtIfqY/R7C0/4EI5wiF7XX7A9hBcNLzfXuplXvQ7Jf7BfKSnLRCE7RHSvd3++r0RL8fHdCWRMMKxj0Mjhcoo5l62MRQZdUI+1qpLUuCdc2AEdcLFum1+xVKbq/NubtGR8PpfOIZlekIRdKXcSHk4fiXisTSveZq9P4a4zik0xbmlA92mD1ShUlM88LJKxR650mxVOFt8KvvGf/FvW6bZr7sMoXfK8twTeoilf+GteKKc+n+esWQI/aiW695rLW44yVE81WV0XraMilqYOFjdOS9EWsCsCw0jeVggmvh8/FbxXLoF0npaz2jiYWlKvYqegsCz5+NnY1SlQb4g3F26PjfNOBQdDXNmWKEkbt3HywRfCj+4qjKBHEyA6n6rxyt7udAqNOd1ZKw7sbloqe9/P7Mf7Rg1aaO9yKPaShLcPh5meUVnfvZXd+TWLlZlTFAb0+DTvcTmJxz/c6E4ufvdZHmMKt6L0MMjG7E8vnz72iThXsGzIE0IeWjInbNi0aaPdejYmYuRjVIvYSxJDbLM4APSixsnE7iEWhfE/XaAg8ZwMLSw863+xnmgg87IFLgd+7DmawTTFKuTUEfacJN6OGKsOlGK5bD7yyiGMk9GnuKUBG+LxT2q9whtJnGCUszILBtwjgezagBkpdleCwx17V6JjlgG/hcIsi3oLxS/GaDN9n1DU87nZbfiPOPQPYyJjl1UbAuO1GzQavcpoRgP5XHEjC427UUC7uHiLFYS+hjF1CZsgKwzBpnwX29yGBQCAQCAQCgUAgEAgEAoFAIBAIBAKC/AdFIm0Tev+eLAAAAABJRU5ErkJggg==" alt="Kali Linux Logo">
+            <h4>Kali Linux</h4>
+            <p>
+              Distro spesialis hacking dan penetration testing. Dipakai secara luas oleh ethical hacker dan tim red team.
+            </p>
+          </div>
+      
+          <div class="distro">
+            <img src="data:image/jpeg;base64,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" alt="Parrot OS Logo">
+            <h4>Parrot OS</h4>
+            <p>
+              Mirip Kali tapi lebih ringan dan fokus ke privasi. Cocok buat cybersec dan penggunaan sehari-hari.
+            </p>
+          </div>
+      
+          <div class="distro">
+            <img src="data:image/png;base64,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" alt="Linux Mint Logo">
+            <h4>Linux Mint</h4>
+            <p>
+              Cocok buat pemula. Tampilan klasik dan stabil, ideal buat transisi dari Windows.
+            </p>
+          </div>
+      
+          <div class="distro">
+            <img src="data:image/jpeg;base64,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" alt="Tails OS Logo">
+            <h4>Tails</h4>
+            <p>
+              Distro privasi tingkat dewa. Semua koneksi lewat TOR dan live mode — cocok buat whistleblower dan aktivitas anonim.
+            </p>
+          </div>
+        </div>
+        <hr style="margin-top: 5px;">
+        <h3 id="sub6-5">6.5 Linux dalam Dunia Cybersecurity :</h2>
+        <p>
+          Dalam dunia cybersecurity, <strong>Linux bukan sekadar sistem operasi</strong>—dia adalah senjata utama. Banyak profesional keamanan, ethical hacker, dan peneliti digital forensik lebih memilih Linux dibanding OS lain. Kenapa? Karena Linux itu fleksibel, transparan, dan powerful banget buat operasi teknikal tingkat tinggi.
+        </p>
+      
+        <h4>🔧 Kenapa Linux Jadi Pilihan Para Cybersec?</h4>
+        <ul>
+          <li><strong>Akses Root:</strong> Lu bisa kontrol sistem dari dalam, tanpa batas.</li>
+          <li><strong>Open Source:</strong> Bisa diubah, dimodif, dikustomisasi sesuai kebutuhan.</li>
+          <li><strong>Command Line Power:</strong> Terminal-nya jadi senjata utama, bukan sekadar pelengkap.</li>
+          <li><strong>Tools Eksklusif:</strong> Banyak tools hacking dan forensic hanya tersedia di Linux.</li>
+          <li><strong>Privasi & Anonimitas:</strong> Lebih mudah setting VPN, TOR, sandbox, dan firewall.</li>
+        </ul>
+      
+        <h4>🎯 Area Cybersecurity yang Sering Pakai Linux</h4>
+        <ul>
+          <li><strong>Penetration Testing:</strong> Eksekusi serangan simulasi ke sistem target.</li>
+          <li><strong>Digital Forensics:</strong> Investigasi data dan recovery bukti digital.</li>
+          <li><strong>Malware Analysis:</strong> Melacak dan memahami cara kerja malware.</li>
+          <li><strong>Network Security:</strong> Scan celah jaringan, konfigurasi firewall, IDS, dll.</li>
+          <li><strong>Red Team & Blue Team:</strong> Linux digunakan baik buat serangan (Red) maupun pertahanan (Blue).</li>
+        </ul>
+      
+        <p>
+          Kalau lo baru nyemplung ke dunia ini, mending mulai dari Kali atau Parrot, pelajari terminal Linux, kuasai basic networking & tools dasar. Jangan langsung mikir jadi hacker, tapi pahami sistem, mindset, dan etikanya dulu. Ingat: <strong>Skill boleh gila, tapi mental harus bijak.</strong>
+        </p>
+      
+        <p>
+          Dunia cyber itu medan perang digital. Linux adalah senjata lo. Pelajari, kuasai, lalu bertarunglah dengan etika dan tujuan yang benar 💀💻.
+        </p>
+    </article>
+    
+    <article id="judul7">
+      <h2>△ |Penutup|</h2>
+      <p>
+        Setelah semua pembahasan dari awal sampai akhir, satu hal yang harus lu pahami: dunia cybersecurity bukan cuma soal skill, tapi juga soal sikap. Ilmu tanpa etika cuma bikin kehancuran. Tapi ilmu yang dikendalikan dengan niat baik, bisa jadi tameng, pedang, bahkan perisai untuk melindungi dunia digital yang makin brutal ini.
+      </p>
+    
+      <p>
+        CyberX bukan cuma tempat belajar, tapi juga tempat buat lu ngerti bahwa jadi ahli itu bukan soal keren-kerenan, tapi soal tanggung jawab. Lu boleh jago nge-bypass sistem, tapi kalau nggak punya batas, lu cuma jadi penjahat digital.
+      </p>
+    
+      <p>
+        Teruslah belajar, teruslah eksplorasi. Dunia cyber itu luas, dan selalu berubah. Tools berganti, teknik makin mutakhir, ancaman makin kompleks. Tapi satu hal yang nggak pernah berubah: prinsip.
+      </p>
+    
+      <blockquote style="margin-top:20px; font-style:italic; color:#00ffe5; border-left:4px solid #00ffe5; padding-left:15px;">
+        “Belajarlah untuk menguasai, bukan untuk menghancurkan.”
+      </blockquote>
+    
+      <p style="margin-top:30px;">
+        Sampai jumpa di medan digital selanjutnya. Entah lo nanti jadi defender, attacker, researcher, atau analyst — jadilah yang berkelas.  
+        <br><br>
+        <strong>— CyberX Team</strong>
+      </p>
+    </article> 
+    
+    <section id="bab-interaktif">
+      <h2>Tes Pemahaman CyberX</h2>
+      <p>Jawab 10 soal berikut dengan serius! Tes ini cuma bisa sekali, jadi jangan asal tebak ya 😏</p>
+    
+      <form id="quizForm">
+        <div>
+          <p>1. Apa fungsi utama dari Nmap?</p>
+          <label><input type="radio" name="q1" value="a"> Untuk menyusup ke server</label><br>
+          <label><input type="radio" name="q1" value="b"> Untuk memindai jaringan dan port</label><br>
+          <label><input type="radio" name="q1" value="c"> Untuk mengenkripsi file</label>
+        </div>
+    
+        <div>
+          <p>2. Apa itu phishing?</p>
+          <label><input type="radio" name="q2" value="a"> Teknik serangan brute force</label><br>
+          <label><input type="radio" name="q2" value="b"> Teknik memalsukan identitas untuk mencuri data</label><br>
+          <label><input type="radio" name="q2" value="c"> Teknik scanning port server</label>
+        </div>
+    
+        <div>
+          <p>3. Sistem operasi mana yang bersifat open source?</p>
+          <label><input type="radio" name="q3" value="a"> Windows</label><br>
+          <label><input type="radio" name="q3" value="b"> macOS</label><br>
+          <label><input type="radio" name="q3" value="c"> Linux</label>
+        </div>
+    
+        <div>
+          <p>4. Apa tujuan utama dari firewall?</p>
+          <label><input type="radio" name="q4" value="a"> Mengizinkan semua akses ke jaringan</label><br>
+          <label><input type="radio" name="q4" value="b"> Mencegah akses tidak sah ke jaringan</label><br>
+          <label><input type="radio" name="q4" value="c"> Mempercepat koneksi internet</label>
+        </div>
+    
+        <div>
+          <p>5. Apa itu brute force attack?</p>
+          <label><input type="radio" name="q5" value="a"> Serangan yang mencoba semua kombinasi password</label><br>
+          <label><input type="radio" name="q5" value="b"> Serangan yang mengirim virus</label><br>
+          <label><input type="radio" name="q5" value="c"> Serangan untuk mengambil data lewat jaringan</label>
+        </div>
+    
+        <div>
+          <p>6. Apa yang dimaksud dengan malware?</p>
+          <label><input type="radio" name="q6" value="a"> Perangkat lunak berbahaya</label><br>
+          <label><input type="radio" name="q6" value="b"> Sistem operasi</label><br>
+          <label><input type="radio" name="q6" value="c"> Alat pemindai jaringan</label>
+        </div>
+    
+        <div>
+          <p>7. Apa kepanjangan dari VPN?</p>
+          <label><input type="radio" name="q7" value="a"> Virtual Private Network</label><br>
+          <label><input type="radio" name="q7" value="b"> Verified Personal Network</label><br>
+          <label><input type="radio" name="q7" value="c"> Virtual Protected Node</label>
+        </div>
+    
+        <div>
+          <p>8. Sistem operasi mana yang biasanya digunakan di smartphone iPhone?</p>
+          <label><input type="radio" name="q8" value="a"> Android</label><br>
+          <label><input type="radio" name="q8" value="b"> iOS</label><br>
+          <label><input type="radio" name="q8" value="c"> Windows Phone</label>
+        </div>
+    
+        <div>
+          <p>9. Apa itu social engineering dalam konteks cybersecurity?</p>
+          <label><input type="radio" name="q9" value="a"> Teknik hacking memakai software</label><br>
+          <label><input type="radio" name="q9" value="b"> Manipulasi psikologis untuk mendapatkan informasi</label><br>
+          <label><input type="radio" name="q9" value="c"> Serangan dengan virus</label>
+        </div>
+    
+        <div>
+          <p>10. Apa itu firewall?</p>
+          <label><input type="radio" name="q10" value="a"> Perangkat lunak keamanan jaringan</label><br>
+          <label><input type="radio" name="q10" value="b"> Alat untuk hack jaringan</label><br>
+          <label><input type="radio" name="q10" value="c"> Sistem operasi</label>
+        </div>
+    
+        <br>
+        <button type="button" id="submitBtn" onclick="checkAnswers(event)">Submit Jawaban</button>
+        <p id="result" style="margin-top: 20px; font-weight: bold;"></p>
+      </form>
+    </section>
+  </section>
+
+  <a href="index.html" class="back-btn">⏪ Kembali</a>
+
+  
+<script>
+  const quizForm = document.getElementById('quizForm');
+const submitBtn = document.getElementById('submitBtn');
+const resultDiv = document.getElementById('result');
+const STORAGE_KEY = 'cyberx_quiz_result';
+
+// Fungsi buat load hasil dari localStorage
+function loadResult() {
+  const savedResult = localStorage.getItem(STORAGE_KEY);
+  if (savedResult) {
+    resultDiv.textContent = savedResult;
+    submitBtn.disabled = true;
+    // Disable semua radio
+    const inputs = quizForm.querySelectorAll('input[type="radio"]');
+    inputs.forEach(input => input.disabled = true);
+  }
+}
+
+// Fungsi buat ngecek jawaban dan simpen hasil
+function checkAnswers(event) {
+  event.preventDefault();
+  let score = 0;
+  const answers = {
+    q1: 'b', q2: 'b', q3: 'c', q4: 'b', q5: 'a', q6: 'a', q7: 'a', q8: 'b', q9: 'b', q10: 'a'
+  };
+
+  for (const [key, correct] of Object.entries(answers)) {
+    const userAnswer = quizForm.elements[key].value;
+    if (userAnswer === correct) score++;
+  }
+
+  const resultText = `Skor kamu: ${score} / 10. ${score >= 7 ? 'Mantap!' : 'Coba lagi lain kali.'}`;
+  resultDiv.textContent = resultText;
+
+  // Simpen ke localStorage
+  localStorage.setItem(STORAGE_KEY, resultText);
+
+  submitBtn.disabled = true;
+
+  // Disable semua radio
+  const inputs = quizForm.querySelectorAll('input[type="radio"]');
+  inputs.forEach(input => input.disabled = true);
+}
+
+// Load hasil kalo ada pas halaman dibuka
+loadResult();
+
+quizForm.addEventListener('submit', handleSubmit);
+</script>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide-img');
+    const totalSlides = slides.length;
+    
+    function showSlide(index) {
+      slides.forEach((img, i) => {
+        img.classList.remove('active');
+        if (i === index) img.classList.add('active');
+      });
+    }
+    
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }, 1000); // Ganti gambar tiap 1 detik
+    </script>
+</body>
+</html>

@@ -1,155 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>V-MAZE Login</title>
-  <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5jr6u7scnKcVSugu2x4NwgSf7qcgBY5j8rg&s" type="image/x-icon" sizes="16x16">
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      background-color: #0d0d0d;
-      font-family: monospace;
-      color: #00ffcc;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .login-container {
-      background-color: #1a1a1a;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #00ffcc50;
-      width: 320px;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #00ffcc;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    input {
-      width: 94%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: none;
-      background-color: #0d0d0d;
-      color: #00ffcc;
-      border: 1px solid #00ffcc50;
-      border-radius: 4px;
-      outline: none;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #00ffcc;
-      color: #0d0d0d;
-      font-weight: bold;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background-color: #00ccaa;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CyberX Login/Register</title>
+<style>
+  body {
+    margin: 0; padding: 20px;
+    background: #0d0d0d;
+    font-family: monospace;
+    color: #00ffcc;
+    display: flex; justify-content: center; align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #00ffcc88;
+    width: 360px;
+    padding: 30px;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 10px 0;
+    cursor: pointer;
+    background: #111;
+    border: none;
+    color: #00ffcc99;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .tab-btn.active {
+    background: #00ffcc;
+    color: #0d0d0d;
+  }
+  form {
+    display: none;
+    flex-direction: column;
+  }
+  form.active {
+    display: flex;
+  }
+  label {
+    margin-bottom: 6px;
+  }
+  input {
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #00ffcc50;
+    border-radius: 4px;
+    background: #0d0d0d;
+    color: #00ffcc;
+    outline: none;
+    font-family: monospace;
+  }
+  button {
+    background: #00ffcc;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #0d0d0d;
+    transition: 0.3s;
+  }
+  button:hover {
+    background: #00ccaa;
+  }
+  .output {
+    background: #000a0a;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+  }
+</style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>V-MAZE ACCESS</h2>
+  <div class="container">
+    <h2>CyberX Access</h2>
+    <div class="tabs">
+      <button id="tab-register" class="tab-btn active">Register</button>
+      <button id="tab-login" class="tab-btn">Login</button>
+    </div>
+
+    <!-- Register Form -->
+    <form id="registerForm" class="active">
+      <label for="reg-username">Username</label>
+      <input type="text" id="reg-username" minlength="3" maxlength="15" required />
+
+      <button type="submit">Create Account</button>
+      <div id="reg-output" class="output" style="display:none;"></div>
+    </form>
+
+    <!-- Login Form -->
     <form id="loginForm">
-      <label for="username">Username</label>
-      <input type="text" id="username" required />
+      <label for="log-username">Username</label>
+      <input type="text" id="log-username" required />
 
-      <label for="password">Password</label>
-      <input type="password" id="password" required />
+      <label for="log-password">Credential Password</label>
+      <input type="password" id="log-password" required />
 
-      <label for="access">Access Level</label>
-      <input type="text" id="access" placeholder="Enter your access level" />
-
-      <label for="entry">Entry Phrase</label>
-      <input type="text" id="entry" placeholder="Enter your key phrase..." />
-
-      <button type="submit">ENTER MAZE</button>
+      <button type="submit">Login</button>
+      <div id="log-output" class="output" style="display:none;"></div>
     </form>
   </div>
 
   <script>
-    document.getElementById("loginForm").addEventListener("submit", function (e) {
+    const tabRegister = document.getElementById("tab-register");
+    const tabLogin = document.getElementById("tab-login");
+    const formRegister = document.getElementById("registerForm");
+    const formLogin = document.getElementById("loginForm");
+    const regOutput = document.getElementById("reg-output");
+    const logOutput = document.getElementById("log-output");
+
+    tabRegister.onclick = () => {
+      tabRegister.classList.add("active");
+      tabLogin.classList.remove("active");
+      formRegister.classList.add("active");
+      formLogin.classList.remove("active");
+      regOutput.style.display = "none";
+      logOutput.style.display = "none";
+    };
+
+    tabLogin.onclick = () => {
+      tabLogin.classList.add("active");
+      tabRegister.classList.remove("active");
+      formLogin.classList.add("active");
+      formRegister.classList.remove("active");
+      regOutput.style.display = "none";
+      logOutput.style.display = "none";
+    };
+
+    // Simple random password generator
+    function generateRandomPassword(length = 10) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let pass = "";
+      for(let i=0; i<length; i++) {
+        pass += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return pass;
+    }
+
+    // Register submit
+    formRegister.addEventListener("submit", (e) => {
       e.preventDefault();
+      const username = document.getElementById("reg-username").value.trim();
 
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const access = document.getElementById("access").value !== "root";
-      const entry = document.getElementById("entry").value !== "404";
-
-      localStorage.setItem("vm_username", username);
-      localStorage.setItem("vm_password", password);
-      localStorage.setItem("vm_access", access);
-      localStorage.setItem("vm_entryPhrase", entry);
-
-      // Custom alert element
-    const customAlert = document.createElement("div");
-    customAlert.innerText = "Access credentials saved. Welcome to V-MAZE.";
-    customAlert.style.position = "fixed";
-    customAlert.style.top = "50%";
-    customAlert.style.left = "50%";
-    customAlert.style.transform = "translate(-50%, -50%)";
-    customAlert.style.backgroundColor = "#1a1a1a";
-    customAlert.style.color = "#00ffcc";
-    customAlert.style.padding = "20px 30px";
-    customAlert.style.border = "1px solid #00ffcc";
-    customAlert.style.fontFamily = "monospace";
-    customAlert.style.fontSize = "16px";
-    customAlert.style.borderRadius = "6px";
-    customAlert.style.boxShadow = "0 0 10px #00ffcc50";
-    customAlert.style.zIndex = "9999";
-
-document.body.appendChild(customAlert);
-
-// Setelah 2 detik, hapus alert lalu tampilkan loading
-setTimeout(() => {
-  customAlert.remove();
-
-  // Ganti isi halaman dengan loading screen
-  document.body.innerHTML = `
-    <div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#0d0d0d;color:#00ffcc;font-family:monospace;flex-direction:column">
-      <h2>Entering the Maze...</h2>
-      <div class="loader"></div>
-    </div>
-    <style>
-      .loader {
-        margin-top: 20px;
-        border: 6px solid #0d0d0d;
-        border-top: 6px solid #00ffcc;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
+      if(username.length < 3) {
+        regOutput.textContent = "Username minimal 3 karakter.";
+        regOutput.style.display = "block";
+        return;
       }
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+
+      const generatedPass = generateRandomPassword(12);
+
+      // Simulate API call to backend to save username & credential
+      // For now just show the generated password
+      regOutput.innerHTML = `Akun dibuat!<br>Username: <b>${username}</b><br>Password Credential:<br><code>${generatedPass}</code><br><br><i>Simpan baik-baik password ini, karena akan digunakan untuk login.</i>`;
+      regOutput.style.display = "block";
+
+      // Clear input
+      formRegister.reset();
+
+      // TODO: Kirim data ke backend nanti
+    });
+
+    // Login submit
+    formLogin.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const username = document.getElementById("log-username").value.trim();
+      const password = document.getElementById("log-password").value.trim();
+
+      if(!username || !password) {
+        logOutput.textContent = "Username dan Password wajib diisi.";
+        logOutput.style.display = "block";
+        return;
       }
-    </style>
-  `;
+
+      // Simulate login check, nanti diganti dengan API call ke backend
+      // Contoh dummy:
+      if(password === "test123" && username === "demo") {
+        logOutput.style.color = "#0f0";
+        logOutput.textContent = "Login berhasil, redirect...";
+        logOutput.style.display = "block";
 
         setTimeout(() => {
-            window.location.href = "index.html";
-        }, 2500);
-    }, 2000);
+          window.location.href = "index.html"; // ganti sesuai redirect page
+        }, 1500);
+      } else {
+        logOutput.style.color = "#f00";
+        logOutput.textContent = "Login gagal, cek username & password.";
+        logOutput.style.display = "block";
+      }
     });
   </script>
 </body>

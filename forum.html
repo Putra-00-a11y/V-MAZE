@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forum Obrolan | CyberLore</title>
+  <style>
+    body {
+  background-color: #111;
+  color: #eee;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.forum-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+h1 {
+  text-align: center;
+  color: #0ff;
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+input, textarea {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  resize: none;
+  outline: none;
+}
+
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #0ff;
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #00cccc;
+}
+
+#forumList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pesan-box {
+    border: 1px solid #333;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #111;
+}
+
+.nama {
+    font-weight: bold;
+    color: #4fc3f7;
+  }
+
+  .teks {
+    margin-top: 5px;
+    color: #f1f1f1;
+  }
+
+  .timestamp {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 6px;
+  }
+
+.pesan-box .nama {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #0ff;
+}
+
+.pesan-box .teks {
+  font-size: 1rem;
+}
+
+.back-btn {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 8px 16px;
+  background-color: #2e2e2e;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #444;
+}
+
+.forum-desc {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 20px;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 4px;
+  display: block;
+}
+
+  .vote-wrap {
+    margin-top: 6px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .vote-wrap button {
+    padding: 4px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background: #eee;
+    border-radius: 6px;
+  }
+
+  .vote-wrap button:hover {
+    background: #ddd;
+  }
+  </style>
+</head>
+<body>
+  <main class="forum-container">
+    <h1>💬 Forum Obrolan Publik</h1>
+    <p class="forum-desc">
+        Selamat datang di ruang diskusi publik! Di sini kamu bisa bertukar pikiran, tanya jawab, atau curhat seputar dunia cyber, teknologi, atau apapun yang kamu suka. Harap tetap sopan dan bijak dalam berdiskusi. Setiap pesan akan langsung tampil setelah dikirim dan disimpan secara otomatis.
+      </p>
+      <div style="margin-bottom: 10px;">
+        <input type="text" id="filterInput" placeholder="Filter nama atau isi..." style="padding: 6px; width: 100%; max-width: 300px;">
+      </div>      
+
+    <form id="forumForm">
+        <input type="text" id="nama" placeholder="Nama kamu..." readonly />
+      <textarea id="pesan" placeholder="Tulis pesan kamu..." required></textarea>
+      <button type="submit">Kirim Pesan</button>
+    </form>
+
+    <section id="forumList">
+      <!-- Pesan-pesan akan tampil di sini -->
+    </section>
+    <a href="/index.html" class="back-btn">← Kembali</a>
+  </main>
+
+  <script>
+    const form = document.getElementById("forumForm");
+    const namaInput = document.getElementById("nama");
+    const pesanInput = document.getElementById("pesan");
+    const forumList = document.getElementById("forumList");
+  
+    // URL endpoint BE lu
+    const ENDPOINT = "https://your-backend-url.com/api/forum"; // <- Ganti sesuai BE lu
+  
+    // Ambil nama dari localStorage
+    const storedNama = localStorage.getItem("vm_username");
+    if (storedNama) {
+      namaInput.value = storedNama;
+    } else {
+      namaInput.value = "Anonim";
+    }
+  
+    // On load ambil semua pesan
+    window.onload = async () => {
+      await loadPesan();
+    };
+  
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+  
+      const nama = namaInput.value.trim();
+      const pesan = pesanInput.value.trim();
+  
+      if (!nama || !pesan) return;
+  
+      // Timestamp waktu kirim
+      const waktu = new Date().toISOString();
+  
+      // Kirim data ke backend
+      await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nama, pesan, waktu })
+      });
+  
+      // Kosongin input pesan (nama tetap biar enak)
+      pesanInput.value = "";
+  
+      // Load ulang pesan
+      await loadPesan();
+    });
+  
+    document.getElementById("filterInput").addEventListener("input", loadPesan);
+
+    async function loadPesan() {
+  try {
+    forumList.innerHTML = "<p style='text-align:center'>Loading...</p>";
+
+    const res = await fetch(ENDPOINT);
+    const data = await res.json();
+    const filter = document.getElementById("filterInput").value.toLowerCase();
+
+    forumList.innerHTML = "";
+
+    data.reverse().forEach(msg => {
+      const namaLower = msg.nama.toLowerCase();
+      const pesanLower = msg.pesan.toLowerCase();
+
+      if (filter && !namaLower.includes(filter) && !pesanLower.includes(filter)) return;
+
+      const box = document.createElement("div");
+      box.className = "pesan-box";
+
+      const nama = document.createElement("div");
+      nama.className = "nama";
+      nama.textContent = msg.nama;
+
+      const teks = document.createElement("div");
+      teks.className = "teks";
+      teks.textContent = msg.pesan;
+
+      const waktuElem = document.createElement("div");
+      waktuElem.className = "timestamp";
+      waktuElem.textContent = formatWaktu(msg.waktu);
+
+      const likeBtn = document.createElement("button");
+      likeBtn.textContent = `👍 ${msg.like || 0}`;
+      likeBtn.onclick = async () => {
+        await fetch(`${ENDPOINT}/like/${msg.id}`, { method: "POST" });
+        loadPesan();
+      };
+
+      const dislikeBtn = document.createElement("button");
+      dislikeBtn.textContent = `👎 ${msg.dislike || 0}`;
+      dislikeBtn.onclick = async () => {
+        await fetch(`${ENDPOINT}/dislike/${msg.id}`, { method: "POST" });
+        loadPesan();
+      };
+
+      const voteWrap = document.createElement("div");
+      voteWrap.className = "vote-wrap";
+      voteWrap.appendChild(likeBtn);
+      voteWrap.appendChild(dislikeBtn);
+
+      box.appendChild(nama);
+      box.appendChild(teks);
+      box.appendChild(waktuElem);
+      box.appendChild(voteWrap);
+      forumList.appendChild(box);
+    });
+
+    forumList.scrollTop = forumList.scrollHeight;
+  } catch (err) {
+    forumList.innerHTML = "<p style='text-align:center;color:red'>Gagal memuat data</p>";
+  }
+}
+
+    function formatWaktu(waktuISO) {
+      const date = new Date(waktuISO);
+      const tgl = date.toLocaleDateString("id-ID", {
+        day: "2-digit", month: "long", year: "numeric"
+      });
+      const jam = date.toLocaleTimeString("id-ID", {
+        hour: "2-digit", minute: "2-digit"
+      });
+      return `Dikirim pada ${tgl} - ${jam}`;
+    }
+  </script>  
+</body>
+</html>

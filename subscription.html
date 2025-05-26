@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subscription | CyberLore</title>
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      color: #00ff88;
+    }
+
+    .sub-desc {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #bbb;
+      margin-bottom: 2.5rem;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .plan {
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid #333;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .plan:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(0,255,128,0.15);
+    }
+
+    .basic {
+      background: #1b1b1b;
+      border-color: #555;
+    }
+
+    .premium {
+      background: #111;
+      border: 1px solid #00ff88;
+      box-shadow: 0 0 10px rgba(0,255,128,0.3);
+    }
+
+    .plan h2 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    .basic h2 {
+      color: #aaa;
+    }
+
+    .premium h2 {
+      color: #00ff88;
+    }
+
+    .plan p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      color: #ccc;
+    }
+
+    .benefits {
+      list-style: none;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    .benefits li {
+      margin-bottom: 0.5rem;
+    }
+
+    .benefits li::before {
+      content: '✔ ';
+      color: #00ff88;
+    }
+
+    .btn {
+      display: block;
+      margin-top: 1.5rem;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn.disabled {
+      background: #444;
+      color: #999;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .btn.active {
+      background: #00ff88;
+      color: #000;
+    }
+
+    .btn.active:hover {
+      background: #00cc6f;
+    }
+
+    .price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+  color: #00ff88;
+}
+
+.basic .price {
+  color: #aaa;
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.back-btn {
+  font-size: 1rem;
+  padding: 10px 24px;
+  background: transparent;
+  border: 2px solid #00ff88;
+  border-radius: 12px;
+  color: #00ff88;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+}
+
+.back-btn:hover {
+  background: #00ff88;
+  color: #000;
+}
+  </style>
+</head>
+<body>
+
+  <h1>Pilih Paket Langganan Kamu</h1>
+  <div class="sub-desc">
+    Semua user mendapat paket <strong>Basic Explorer</strong> secara otomatis. Upgrade ke <strong>Backdoor Person</strong> untuk fitur premium dan akses belajar hacking!
+  </div>
+
+  <div class="container">
+
+    <!-- Basic Plan -->
+    <div class="plan basic">
+      <h2>Basic Explorer</h2>
+      <div class="price">Free</div>
+      <p>
+        Paket default untuk semua user CyberLore. Cocok buat pemula yang baru masuk dunia keamanan siber dan ingin mulai dari dasar.
+      </p>
+      <ul class="benefits">
+        <li>Akses ke forum publik & diskusi bebas</li>
+        <li>Modul dasar CyberLore</li>
+        <li>Challenge level pemula</li>
+        <li>Update rutin soal tips & trik dasar</li>
+      </ul>
+      <a href="#" class="btn disabled">Sudah Aktif</a>
+    </div>
+
+    <!-- Premium Plan -->
+    <div class="plan premium">
+    <h2>Backdoor Person</h2>
+    <div class="price">Rp 79.000</div>
+    <p>
+      Kamu yang haus tantangan dan pengen belajar langsung lewat terminal simulasi, bypass, dan exploit nyata. Akses materi rahasia.
+    </p>
+      <ul class="benefits">
+        <li>Akses penuh ke Terminal Belajar (simulasi shell)</li>
+        <li>Challenge dengan exploit nyata (Web, Linux, JS, dll)</li>
+        <li>Tools premium eksklusif buat latihan</li>
+        <li>Early access ke fitur dan modul baru</li>
+      </ul>
+      <a href="#" class="btn active">Upgrade ke Premium</a>
+    </div>
+
+  </div>
+
+  <div class="bottom-nav">
+    <a href="/index.html" class="back-btn">⬅ Kembali ke Beranda</a>
+  </div>  
+</body>
+</html>

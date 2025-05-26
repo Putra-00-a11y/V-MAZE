@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5jr6u7scnKcVSugu2x4NwgSf7qcgBY5j8rg&s" type="image/x-icon" sizes="16x16" />
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <title>CyberLore | Home</title>
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      font-family: monospace;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background-color: #111;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 1000;
+      border-bottom: 1px solid #00ffcc55;
+    }
+
+    .burger {
+      cursor: pointer;
+      width: 30px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .burger div {
+      height: 4px;
+      background-color: #00ffcc;
+      border-radius: 2px;
+    }
+
+    /* Sidebar Nav */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background-color: #111;
+      padding: 20px;
+      box-shadow: 3px 0 5px #00ffcc88;
+      transition: left 0.3s ease;
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar .close-btn {
+      align-self: flex-end;
+      font-size: 30px;
+      color: #00ffcc;
+      cursor: pointer;
+      margin-bottom: 20px;
+      user-select: none;
+    }
+
+    .sidebar nav a {
+      display: block;
+      padding: 12px 0;
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid #00ffcc33;
+      transition: background-color 0.2s;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #00ffcc22;
+    }
+
+    /* Main content & aside */
+    .container {
+      margin-top: 50px;
+      display: flex;
+      flex: 1;
+      min-height: calc(100vh - 100px);
+      padding: 20px;
+    }
+
+    main {
+      flex: 3;
+      padding-right: 20px;
+    }
+
+    aside {
+      flex: 2;
+      background-color: #111;
+      border-left: 1px solid #00ffcc33;
+      padding: 20px;
+      overflow-y: auto;
+      line-height: 1.5;
+    }
+
+    .vmaze-footer {
+  background-color: #111;
+  color: #ccc;
+  padding: 30px 20px;
+  font-size: 14px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  text-align: left;
+  gap: 20px;
+  margin-top: 0px;
+}
+
+.footer-box {
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+
+.footer-box h4 {
+  color: #00ffc3;
+  margin-bottom: 8px;
+}
+
+.footer-box a {
+  color: #00ffc3;
+  text-decoration: none;
+}
+
+.footer-box a:hover {
+  text-decoration: underline;
+}
+
+    /* Scrollbar aside */
+    aside::-webkit-scrollbar {
+      width: 8px;
+    }
+    aside::-webkit-scrollbar-thumb {
+      background-color: #00ffcc55;
+      border-radius: 4px;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      aside {
+        height: 200px;
+        border-left: none;
+        border-top: 1px solid #00ffcc33;
+        margin-top: 20px;
+      }
+    }
+
+    #darkToggle {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #fff; /* sesuaikan sama tema nav lo */
+  margin-left: auto; /* supaya dia nyempil ke kanan */
+  transition: color 0.3s;
+}
+
+#darkToggle:hover {
+  color: #00ffcc;
+}
+
+#chatHelpBtn {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  color: #000;
+  font-size: 22px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  box-shadow: 0 0 10px #00ffccaa;
+  cursor: pointer;
+  z-index: 100;
+  transition: background 0.3s;
+}
+
+#chatHelpBtn:hover {
+  background: #00cfa3;
+}
+
+#darkToggle {
+    overflow: hidden;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #fff; /* sesuaikan sama tema nav lo */
+  margin-right: auto; /* supaya dia nyempil ke kanan */
+  transition: color 0.3s;
+  text-align: center;
+}
+
+#darkToggle:hover {
+  color: #00ffcc;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #eee;
+}
+
+#eyeComfortToggle {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s;
+  text-align: center;
+}
+
+#eyeComfortToggle:hover {
+  color: #ffa500; /* oranye biar nyala */
+}
+
+/* contoh ngubah warna nav saat dark mode */
+.dark-mode nav {
+  background-color: #222;
+}
+
+.eye-comfort {
+  filter: sepia(0.3) saturate(1.2) brightness(0.9);
+}
+
+#bgColorToggle {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+#bgColorToggle:hover {
+  color: #66ff99;
+}
+
+.bg-warna-0 {
+    background-color: #0d0d0d;
+    color: #00ffcc;
+}
+
+.bg-warna-1 {
+  background-color: #fdf6e3;
+  color: #333;
+}
+
+.bg-warna-2 {
+  background-color: #1e1e2f;
+  color: #eee;
+}
+
+.bg-warna-3 {
+  background-color: #282c34;
+  color: #ffcc00;
+}
+
+.bg-warna-4 {
+  background-color: #004d40;
+  color: #e0f2f1;
+}
+
+#btnLog {
+    padding: 3px;
+    margin: 0;
+    position: absolute;
+    width: 100px;
+    background-color: crimson;
+    color: black;
+    opacity: 80%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 3px crimson;
+    font-family: Cambria;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#btnLog:active {
+    padding: 2px;
+    width: 90px;
+}
+
+#btnLogg {
+    padding: 3px;
+    margin: 0;
+    position: absolute;
+    width: 100px;
+    background-color: lightgreen;
+    color: black;
+    opacity: 80%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 3px lightgreen;
+    font-family: Cambria;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#btnLogg:active {
+    padding: 2px;
+    width: 90px;
+}
+
+#feedback-section {
+  margin: 15px 20px 0 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+#feedbackForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#feedbackForm input {
+  padding: 7px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  opacity: 80%;
+}
+
+#feedbackForm textarea {
+    padding: 7px;
+    outline: none;
+    height: 100px;
+    border: none;
+    border-radius: 5px;
+    opacity: 80%;
+}
+
+#feedbackForm button {
+  background: #00b894;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#feedbackStatus {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #81ecec;
+}
+
+#tsparticles {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .mini-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.box {
+  background-color: #222;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.box:hover {
+  transform: scale(1.05);
+}
+
+#emg {
+    width: 100%;
+    background-size: cover;
+    image-rendering: optimizeQuality;
+    border-radius: 4px;
+    opacity: 90%;
+}
+
+#emg0 {
+    width: 100%;
+    background-size: cover;
+    image-rendering: optimizeQuality;
+    border-radius: 5px;
+    opacity: 80%;
+}
+
+.rules-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.rule-box {
+  flex: 1 1 50%;
+  background-color: #1d1d1d;
+  color: #eee;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+.rule-box h3 {
+  margin-bottom: 10px;
+  border-bottom: 2px solid #444;
+  padding-bottom: 5px;
+}
+
+.rule-box ul {
+  list-style-type: square;
+  padding-left: 20px;
+}
+
+.rule-box ul li {
+  margin-bottom: 8px;
+}
+
+.vmaze-info {
+  margin: 15px;
+  padding: 20px;
+  background-color: #121212;
+  color: #f0f0f0;
+  border-radius: 10px;
+}
+
+.vmaze-info h3 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  text-align: center;
+  color: #00ffc3;
+}
+
+.info-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.info-card {
+  background-color: #1e1e1e;
+  padding: 15px 20px;
+  border-left: 5px solid #00ffc3;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.info-card:hover {
+  transform: scale(1.02);
+}
+
+.info-card h4 {
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.info-card p {
+  margin: 0;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .info-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+#statistik {
+  margin-top: 3rem;
+  padding: 2rem 1rem;
+  background-color: transparent;
+}
+
+.stat-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  flex: 1;
+  min-width: 200px;
+}
+
+.stat-box h2 {
+  font-size: 2.5rem;
+  color: #00ffaa;
+  margin: 0;
+}
+
+.stat-box p {
+  font-size: 1rem;
+  color: #ccc;
+  margin-top: 0.5rem;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div> <!-- Partikel Background -->
+
+    <div id="tsparticles"></div>
+  <header class="navbar">
+    <div class="burger" id="burgerBtn">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <h1 style="margin-left: 20px; font-weight: normal;">CyberLore</h1>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+      <div class="close-btn" id="closeBtn">&times;</div>
+      <nav>
+          <a href="#">Home</a>
+          <a href="/profil.html" class="sub-link">Profile</a>
+          <a href="/materi.html" class="sub-link">Materi</a>
+          <a href="#" class="sub-link">Modul</a>
+          <a href="#" class="sub-link">documentry</a>
+          <a href="#" class="sub-link">Donasi</a>
+          <a href="/updates.html" class="sub-link">Updates</a>
+          <a href="/subscription.html" class="sub-link">Subcription</a>
+          <a href="/forum.html" class="sub-link">Forum Obrolan</a>
+        </nav>
+        <label for="bgColorToggle">Mode pergantian warna BG :</label>
+        <button id="bgColorToggle" title="Ganti Warna Background">🎨</button>
+        <label for="eyeComfortToggle">Mode ramah mata :</label>
+        <button id="eyeComfortToggle" title="Toggle Mode Ramah Mata">👁️</button>
+        <label for="darkToggle">Mode gelap/terang :</label>
+    <button id="darkToggle" title="Toggle Dark Mode">🌙</button>
+
+    <button id="btnLog" type="button">LOGOUT</button>
+    <button id="btnLogg" type="button">LOGIN</button>
+  </aside>
+
+  <div class="container">
+    <main>
+        <img src="https://cdn.pixeldojo.ai/pixeldojo/generated-images/industry-news/navigating-the-ethical-landscape-of-ai-in-scientific-photography.png" loading="lazy" alt="ethics-img" id="emg">
+      <h2>Selamat datang di CyberLore!</h2>
+      <p>
+        Masuk ke dalam situs CyberLore. Di sini tiap sudut nyimpen rahasia, tiap bayangan punya tantangan. Dashboard ini jadi markas kamu buat ngelawan teka-teki rumit, ngetes skill hacker kamu, dan naik level dari pemula sampe jagoan.
+      </p>
+      <p>
+        Perjalanan ini gak cuma soal nyampe tujuan, tapi gimana kamu bisa ngerjain setiap rintangan. Misi-misi buat pemula tapi punya tingkat kesulitan yang bikin otak kamu makin encer. Belajar, adaptasi, dan taklukin tantangan digital yang telah dirancang khusus buat kamu.
+      </p> <br>
+      <p>
+        Gunain sidebar buat jelajah fitur, cek progress, atau lainnya. Tantangannya udah nunggu, bro. Semangat ya, Initiate!
+      </p>
+
+      <section class="mini-boxes">
+        <div class="box">BELAJAR GRATIS</div>
+        <div class="box">BANYAK MODULE</div>
+        <div class="box">NEWBIE (GREEN HAT)</div>
+        <div class="box">BASIC LEARNING</div>
+        <div class="box">SITUS SIMPEL</div>
+        <div class="box">PROBLEM SOLVING</div>
+      </section>      
+    </main>
+
+    <aside>
+      <h3>Kisah Dalam CyberLore</h3>
+      <p>
+        CyberLore bukan cuma tantangan, tapi cerita yang ditulis pake kode dan bayangan. Setiap level yang kamu taklukin bakal ningkatin cara berpikir rasional kamu dan juga logika kamu dengan cepat dalam soal dunia siber. Di sini kamu bakal nemuin banyak tentangan, budaya hacker, dan kisah mereka yang pernah berani masuk duluan.
+      </p>
+      <p>
+        Lore ini nyampur budaya hacker klasik sama teka-teki cybersecurity modern. Dari decrypt pesan, ngelawan jebakan jaringan, sampai ngelawan AI penjaga—setiap langkah bikin skill kamu makin tajam.
+      </p>
+      <p>
+        Komunitas CyberLore hidup karena rasa penasaran dan pantang nyerah. Gabung forum, share trik, dan bantu berkembang secara bersama. Perjalanan kamu di sini bakal bikin kamu bukan cuma user yang abal - abal pake tools doang, tapi hacker yang ber-etika dan bertanggung jawab penuh.
+      </p>
+      <p>
+        Inget, bro, di Lore ini ilmu itu kekuatan dan sabar itu kunci. Jelajahi pelan-pelan, belajar dari salah, dan jangan lupa: Ilmu sesungguhnya ada di dalam kepala kamu sendiri.
+      </p> <br>
+      <img src="https://c4.wallpaperflare.com/wallpaper/139/610/492/quote-simple-motivational-minimalism-wallpaper-thumb.jpg" loading="lazy" alt="ethics-img" id="emg0">
+      <br>  <br> <hr> <br>
+      <p>Mencoba tidak harus besok, minggu depan, bulan depan, setahun?? tidak juga. Login dan pelajarilah hal - hal dasar bidang CyberSecurity disini.</p>
+    </aside>
+  </div>
+
+  <section class="rules-section">
+    <div class="rule-box">
+      <h3>Peraturan</h3>
+      <ul>
+        <li>Setiap pengguna wajib menjaga kerahasiaan identitas dan kredensial login-nya.</li>
+        <li>Dilarang keras menyebarkan exploit, bug, atau celah keamanan kepada publik tanpa izin developer.</li>
+        <li>Tidak diperkenankan melakukan brute-force, inject, atau metode ilegal terhadap sistem CyberLore. Terkecuali menjadi pentesting dengan izin (mendapat benefit).</li>
+        <li>Gunakan tools dan fitur secara bertanggung jawab.</li>
+        <li>Feedback dan saran harus disampaikan dengan sopan dan konstruktif.</li>
+        <li>Wajib baca petunjuk sebelum mulai misi/level baru. Kesalahan bukan tanggung jawab sistem.</li>
+        <li>Sidebar & fitur tertentu hanya bisa diakses kalau status login aktif.</li>
+        <li>Gunakan bahasa yang sopan dan santai di area publik situs (Fitur Forum Obrolan).</li>
+        <li>Semua bug atau glitch bisa dilaporin ke pihak dev/cs.</li>
+      </ul>
+    </div>
+    <div class="rule-box">
+      <h3>Ketentuan</h3>
+      <ul>
+        <li>CyberLore adalah situs simulasi yang dirancang untuk pembelajaran, pengujian logika, dan eksplorasi digital dalam hal siber secara etis.</li>
+        <li>Segala aktivitas yang dilakukan di dalam situs ini tidak boleh disalahgunakan untuk tujuan ilegal atau merugikan pihak lain.</li>
+        <li>Pengguna dilarang keras menyalin, menjiplak, atau menjual kembali sistem, modul, atau konten CyberLore tanpa izin.</li>
+        <li>Setiap progress, data user, dan riwayat aktivitas akan disimpan secara terkunci untuk pengalaman yang lebih personal.</li>
+        <li>Developer berhak mengubah fitur, modul, dan akses kapan saja demi keamanan sistem dan kenyamanan pengguna.</li>
+        <li>User diperbolehkan request fitur baru lewat form feedback, tapi ga semua request bakal di-approve (Jika mendapat approve, pengguna berhak mendapat benefit/keuntungan dari Developer).</li>
+        <li>Setiap user bertanggung jawab atas aktivitasnya sendiri, sistem cuma fasilitator.</li>
+        <li>Gak ada ranking antar pengguna. Ini bukan kompetisi, ini perjalanan belajar kamu sendiri.</li>
+        <li>Situs ini bebas iklan dan tracking pihak ketiga. Fokusnya cuma kamu, maze, dan skill yang dibangun.</li>
+        <li>Direkomendasikan menggunakan layar lebar/desktop untuk belajar hal ini.</li>
+      </ul>
+    </div>
+  </section> 
+  
+  <section class="vmaze-info">
+    <h3>ℹ️Informasi Tambahan seputar CyberLore</h3>
+    <div class="info-cards">
+      <div class="info-card">
+        <h4>Apa itu CyberLore?</h4>
+        <p>CyberLore adalah situs belajar siber interaktif buat pemula. Mulai dari dasar, langsung praktik, dan semua tantangan dibikin fun tapi tetap bikin mikir.</p>
+      </div>
+      <div class="info-card">
+        <h4>Mulai dari mana?</h4>
+        <p>Buka sidebar kamu, pilih modul, dan langsung mulai belajar. Gak usah takut gagal, kalaupun belum paham cek Documentry.</p>
+      </div>
+      <div class="info-card">
+        <h4>Butuh skill coding dulu?</h4>
+        <p>Minimal paham penggunaan basic command terminal(cd, mkdir, ls, l, cls/clear, mv, rm, dll) baik windows maupun Linux juga paham logic, console, dan toolkit dev(F12). Materi dibikin step by step biar makin gampang dipahami.</p>
+      </div>
+      <div class="info-card">
+        <h4>Fitur CyberLore</h4>
+        <p>Login simpel, dark-mode, form feedback, modul maze, dan pembelajaran berbasis tantangan. Semuanya dibungkus dalam antarmuka yang interaktif.</p>
+      </div>
+      <div class="info-card">
+        <h4>Apa yang dibutuhin?</h4>
+        <p>Terminal Windows / Terminal Linux / Termux Android. Namun tidak semua modul akan menggunakan terminal.</p>
+      </div>
+      <div class="info-card">
+        <h4>Keamanan data</h4>
+        <p>Data kamu disimpan secara aman dan terkunci di database.</p>
+      </div>
+      <div class="info-card">
+        <h4>Update?</h4>
+        <p>Fitur terus ditambah dan diperbarui. Pantau informasi di Updates atau nanti bakal ada notif dari situsnya.</p>
+      </div>
+      <div class="info-card">
+        <h4>Bolehkah belajar menggunakan HP?</h4>
+        <p>Direkomendasikan belajar menggunakan layar dekstop / laptop / komputer / tablet(kalau ada). Bisa di handphone cuman ada batasan tertentu juga kenyamanan tidak seperti layar lebar.</p>
+      </div>
+      <div class="info-card">
+        <h4>Apakah ada materi untuk saya pelajari?</h4>
+        <p>Materi telah di sediakan di sidebar, cek dan pelajari kalau bisa memungkinkan bisa catat di buku personal / buku harian sebagai pengingat.</p>
+      </div>
+      <div class="info-card">
+        <h4>Literasi</h4>
+        <p>Budayakan membaca sebelum bertanya, baca ketentuan dan peraturan serta informasi dengan baik. Jika benar - benar tidak ada / tidak tercantum bisa bertanya di Forum Obrolan.</p>
+      </div>
+    </div>
+  </section>  
+  
+  <section id="statistik">
+    <div class="stat-grid">
+      <div class="stat-box">
+        <h2 id="visitorCount">0</h2>
+        <p>Pengunjung Baru</p>
+      </div>
+      <div class="stat-box">
+        <h2 id="totalHits">0</h2>
+        <p>Total Kunjungan</p>
+      </div>
+      <div class="stat-box">
+        <h2 id="lastVisit">-</h2>
+        <p>Terakhir Akses</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="feedback-section">
+    <h2>Kirim Saran / Pesan ke Developer! 📬</h2>
+    <form id="feedbackForm">
+      <input type="text" id="usernameFeedback" placeholder="Username" style="background-color: lightgray;" readonly />
+      <textarea id="feedbackText" placeholder="Tulis saran atau pesan di sini..." required></textarea>
+      <button type="submit">Kirim</button>
+    </form>
+    <div id="feedbackStatus"></div>
+  </section>  
+
+  <!-- Tombol chat bulat -->
+<a href="/help.html" id="chatHelpBtn" title="Butuh Bantuan?">💬</a>
+
+<footer class="vmaze-footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h4>&copy; 2025 CyberLore</h4>
+      <p>Semua hak cipta dilindungi.</p>
+    </div>
+    <div class="footer-box">
+      <h4>Developer</h4>
+      <p>Dibuat sepenuh hati oleh "<strong>P</strong>"</p>
+    </div>
+    <div class="footer-box">
+      <h4>Special Thanks</h4>
+      <p>Untuk semua yang mendukung dunia edukasi cyber secara positif.</p>
+    </div>
+    <div class="footer-box">
+      <h4>Support</h4>
+      <p>Gabung komunitas: <a href="#">Group CyberLore</a></p>
+    </div>
+  </div>
+</footer> 
+
+<script>
+  fetch('https://your-backend-url/track-visitor')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('visitorCount').textContent = data.uniqueVisitors ?? '0';
+      document.getElementById('totalHits').textContent = data.totalHits ?? '0';
+      document.getElementById('lastVisit').textContent = data.lastVisit ?? '-';
+    })
+    .catch(err => {
+      document.getElementById('visitorCount').textContent = 'Null';
+      document.getElementById('totalHits').textContent = 'Null';
+      document.getElementById('lastVisit').textContent = 'Null';
+    });
+  </script>  
+
+  <script>
+    const bgToggle = document.getElementById('bgColorToggle');
+const warnaList = ['bg-warna-0', 'bg-warna-1', 'bg-warna-2', 'bg-warna-3', 'bg-warna-4'];
+let currentIndex = 0;
+    const burgerBtn = document.getElementById("burgerBtn");
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeBtn");
+    const darkToggle = document.getElementById('darkToggle');
+    const logg = document.getElementById('btnLogg');
+    const feedbackForm = document.getElementById('feedbackForm');
+const feedbackStatus = document.getElementById('feedbackStatus');
+const isLoggedIn = localStorage.getItem("vm_username");
+const subLinks = document.querySelectorAll('.sub-link');
+
+document.getElementById('btnLog').addEventListener('click', async () => {
+  const username = localStorage.getItem('username'); // asumsi username disimpan di sini
+
+  if (!username) {
+    alert('Lu belum login bro!');
+    return;
+  }
+
+  try {
+    const res = await fetch(`/api/users/${username}`, { method: 'DELETE' });
+    if (res.ok) {
+      localStorage.clear();
+      alert('Akun lu berhasil dihapus dan logout.');
+      window.location.href = 'login.html';
+    } else {
+      alert('Gagal hapus akun, coba lagi.');
+    }
+  } catch (err) {
+    alert('Error network, coba lagi nanti.');
+  }
+});
+
+feedbackForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const username = document.getElementById('usernameFeedback').value.trim();
+  const feedback = document.getElementById('feedbackText').value.trim();
+
+  if (!username || !feedback) return;
+
+  const feedbackData = {
+    username,
+    feedback,
+    timestamp: new Date().toISOString()
+  };
+
+  // 1. Simpan ke localStorage
+  let allFeedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+  allFeedbacks.push(feedbackData);
+  localStorage.setItem('feedbacks', JSON.stringify(allFeedbacks));
+
+  // 2. Kirim ke backend (pastikan endpoint lu bener)
+  fetch('http://localhost:3000/feedback', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(feedbackData)
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Gagal kirim ke server');
+    return res.json();
+  })
+  .then(data => {
+    feedbackStatus.textContent = '✅ Saran lu udah nyampe ke server juga!';
+    feedbackForm.reset();
+  })
+  .catch(err => {
+    console.error(err);
+    feedbackStatus.textContent = '⚠️ Gagal kirim ke server, tapi udah disimpan lokal.';
+    setTimeout(() => {
+      feedbackStatus.textContent = '';
+    }, 2300);
+  });
+});
+
+    log.addEventListener('click', () => {
+        const set = confirm('Yakin mau hapus akun? (Semua data bakal hilang!)');
+        if(set === true) {
+            setTimeout(() => {
+                localStorage.clear();
+                window.location.href = "login.html";
+            }, 1600);
+        }
+        else {  
+            return null;
+        }
+    });
+
+darkToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+
+  // Ganti icon antara 🌙 sama ☀️
+  if(document.body.classList.contains('dark-mode')) {
+    darkToggle.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    darkToggle.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  }
+});
+
+
+// Load dari localStorage
+window.addEventListener('load', () => {
+  const savedWarna = localStorage.getItem('bgWarna');
+  if(savedWarna) {
+    document.body.classList.add(savedWarna);
+    currentIndex = warnaList.indexOf(savedWarna);
+  }
+});
+
+bgToggle.addEventListener('click', () => {
+  // Hapus semua warna
+  warnaList.forEach(warna => document.body.classList.remove(warna));
+
+  // Naikkan index
+  currentIndex = (currentIndex + 1) % warnaList.length;
+
+  // Tambahin warna baru
+  const newWarna = warnaList[currentIndex];
+  document.body.classList.add(newWarna);
+  localStorage.setItem('bgWarna', newWarna);
+});
+
+// Load tema dari localStorage pas halaman dibuka
+window.addEventListener('load', () => {
+  if(localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    darkToggle.textContent = '☀️';
+  } else {
+    darkToggle.textContent = '🌙';
+  }
+});
+
+const eyeComfortToggle = document.getElementById('eyeComfortToggle');
+
+eyeComfortToggle.addEventListener('click', () => {
+  document.body.classList.toggle('eye-comfort');
+
+  if(document.body.classList.contains('eye-comfort')) {
+    eyeComfortToggle.style.color = '#ffa500';
+    localStorage.setItem('eyeComfort', 'on');
+  } else {
+    eyeComfortToggle.style.color = '#fff';
+    localStorage.setItem('eyeComfort', 'off');
+  }
+});
+
+// Load setting dari localStorage saat halaman dibuka
+window.addEventListener('load', () => {
+  if(localStorage.getItem('eyeComfort') === 'on') {
+    document.body.classList.add('eye-comfort');
+    eyeComfortToggle.style.color = '#ffa500';
+  }
+});
+
+    burgerBtn.addEventListener("click", () => {
+      sidebar.classList.add("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    window.addEventListener("click", (e) => {
+      if (
+        sidebar.classList.contains("active") &&
+        !sidebar.contains(e.target) &&
+        !burgerBtn.contains(e.target)
+      ) {
+        sidebar.classList.remove("active");
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+  const savedUsername = localStorage.getItem('vm_username');
+  if (savedUsername) {
+    document.getElementById('usernameFeedback').value = savedUsername;
+  }
+
+  const usern = localStorage.getItem("vm_username");
+    if (usern) {
+        // Udah login, sembunyikan tombol login
+        logg.style.display = "none";
+    } else {
+        log.style.display = "none";
+        // Belum login, tombol bisa diklik
+        logg.addEventListener('click', () => {
+            // Arahkan ke halaman login
+            window.location.href = "login.html";
+        });
+    }
+});
+
+subLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    if (!isLoggedIn) {
+      e.preventDefault();
+      showCustomAlert("⚠️ Akses ditolak! Login dulu, bro.");
+    }
+  });
+});
+
+function showCustomAlert(message) {
+  const alertBox = document.createElement('div');
+  alertBox.textContent = message;
+  alertBox.style.position = 'fixed';
+  alertBox.style.bottom = '10px';
+  alertBox.style.background = '#222';
+  alertBox.style.color = '#fff';
+  alertBox.style.padding = '12px 20px';
+  alertBox.style.borderRadius = '10px';
+  alertBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.5)';
+  alertBox.style.zIndex = '9999';
+
+  document.body.appendChild(alertBox);
+  setTimeout(() => alertBox.remove(), 3200);
+}
+
+
+particlesJS("particles-js", {
+  "particles": {
+      "number": {
+          "value": 250,
+          "density": {
+              "enable": true,
+              "value_area": 800
+          }
+      },
+      "color": {
+          "value": "#000"
+      },
+      "shape": {
+          "type": "circle",
+          "stroke": {
+              "width": 0,
+              "color": "#ff5555"
+          }
+      },
+      "opacity": {
+          "value": 0.6,
+          "random": true,
+          "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.1
+          }
+      },
+      "size": {
+          "value": 4,
+          "random": true,
+          "anim": {
+              "enable": true,
+              "speed": 3,
+              "size_min": 0.1
+          }
+      },
+      "line_linked": {
+          "enable": true,
+          "distance": 100,
+          "color": "#00ffc3",
+          "opacity": 0.1,
+          "width": 1
+      },
+      "move": {
+          "enable": true,
+          "speed": 4,
+          "direction": "none",
+          "random": true,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+              "enable": false
+          }
+      }
+  },
+  "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+          "onhover": {
+              "enable": false,
+              "mode": "repulse"
+          },
+          "onclick": {
+              "enable": false,
+              "mode": "push"
+          }
+      }
+  },
+  "retina_detect": true
+});
+  </script>
+</body>
+</html>

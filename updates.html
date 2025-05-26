@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Update Logs</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #0e0e0e;
+      color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      color: #00bcd4;
+      margin-bottom: 10px;
+    }
+
+    .desc {
+      text-align: center;
+      color: #aaa;
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+
+    .timeline {
+      position: relative;
+      margin-left: 20px;
+      padding-left: 20px;
+      border-left: 2px solid #444;
+    }
+
+    .entry {
+      margin-bottom: 40px;
+      position: relative;
+      animation: fadeUp 0.6s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .entry::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 25px;
+      width: 12px;
+      height: 12px;
+      background-color: #00bcd4;
+      border-radius: 50%;
+      border: 2px solid #0e0e0e;
+      box-shadow: 0 0 0 1.5px #00bcd4;
+    }
+
+    .date {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 5px;
+    }
+
+    .content {
+      background-color: #1c1c1c;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #000;
+    }
+
+    .content ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .content ul li {
+      margin-bottom: 8px;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 50px;
+      text-align: center;
+      color: #00bcd4;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .content {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Update Logs</h1>
+    <p class="desc">Semua perubahan penting dan pembaruan fitur akan ditampilkan di sini secara kronologis.</p>
+
+    <div class="timeline">
+
+      <div class="entry">
+        <div class="date">26 Mei 2025</div>
+        <div class="content">
+          <ul>
+            <li>Forum diskusi publik ditambahkan</li>
+            <li>Fitur filter nama & kata kunci di forum</li>
+            <li>Fitur like/dislike setiap pesan</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="date">25 Mei 2025</div>
+        <div class="content">
+          <ul>
+            <li>Halaman profil lengkap dengan deskripsi dan kontak</li>
+            <li>Statistik pengunjung unik, total kunjungan, terakhir akses</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="date">20 Mei 2025</div>
+        <div class="content">
+          <ul>
+            <li>Halaman landing page V-Pendulum selesai</li>
+            <li>Dark theme & tampilan misterius</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="/index.html" class="back-link">← Kembali ke Beranda</a>
+  </div>
+</body>
+</html>
