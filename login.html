@@ -152,58 +152,98 @@
       return pass;
     }
 
-    // Register submit
-    formRegister.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const username = document.getElementById("reg-username").value.trim();
+    formRegister.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const username = document.getElementById("reg-username").value.trim();
 
-      if(username.length < 3) {
-        regOutput.textContent = "Username minimal 3 karakter.";
-        regOutput.style.display = "block";
-        return;
-      }
+  if (username.length < 3) {
+    regOutput.textContent = "Username minimal 3 karakter.";
+    regOutput.style.display = "block";
+    return;
+  }
 
-      const generatedPass = generateRandomPassword(12);
+  try {
+    const res = await fetch("https://clbe-production.up.railway.app/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username })
+    });
 
-      // Simulate API call to backend to save username & credential
-      // For now just show the generated password
-      regOutput.innerHTML = `Akun dibuat!<br>Username: <b>${username}</b><br>Password Credential:<br><code>${generatedPass}</code><br><br><i>Simpan baik-baik password ini, karena akan digunakan untuk login.</i>`;
+    const data = await res.json();
+
+    if (res.ok) {
+      regOutput.innerHTML = `✅ Akun berhasil dibuat!<br><br>🧾 Username: <b>${data.username}</b><br>🔑 Password: <code>${data.password}</code><br><br><i>Simpan baik-baik password ini, karena akan digunakan untuk login.</i>`;
+      regOutput.style.color = "#0f0";
       regOutput.style.display = "block";
-
-      // Clear input
       formRegister.reset();
+    } else {
+      regOutput.textContent = data.error || "Gagal mendaftar.";
+      regOutput.style.color = "#f00";
+      regOutput.style.display = "block";
+    }
 
-      // TODO: Kirim data ke backend nanti
+  } catch (err) {
+    regOutput.textContent = "Gagal konek ke server. Coba lagi.";
+    regOutput.style.color = "#f00";
+    regOutput.style.display = "block";
+  }
+});
+
+formLogin.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const username = document.getElementById("log-username").value.trim();
+  const password = document.getElementById("log-password").value.trim();
+  const loginBtn = formLogin.querySelector("button[type='submit']");
+
+  if (!username || !password) {
+    logOutput.textContent = "Username dan Password wajib diisi.";
+    logOutput.style.color = "#f00";
+    logOutput.style.display = "block";
+    return;
+  }
+
+  // Tampilkan loading
+  loginBtn.disabled = true;
+  loginBtn.textContent = "Loading...";
+
+  try {
+    const res = await fetch("https://clbe-production.up.railway.app/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
     });
 
-    // Login submit
-    formLogin.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const username = document.getElementById("log-username").value.trim();
-      const password = document.getElementById("log-password").value.trim();
+    const data = await res.json();
 
-      if(!username || !password) {
-        logOutput.textContent = "Username dan Password wajib diisi.";
-        logOutput.style.display = "block";
-        return;
-      }
+    if (res.ok) {
+      logOutput.style.color = "#0f0";
+      logOutput.textContent = "Login berhasil, redirect...";
+      logOutput.style.display = "block";
 
-      // Simulate login check, nanti diganti dengan API call ke backend
-      // Contoh dummy:
-      if(password === "test123" && username === "demo") {
-        logOutput.style.color = "#0f0";
-        logOutput.textContent = "Login berhasil, redirect...";
-        logOutput.style.display = "block";
+      // Simpan ke localStorage kalau perlu
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("subscriptionActive", data.subscriptionActive);
 
-        setTimeout(() => {
-          window.location.href = "index.html"; // ganti sesuai redirect page
-        }, 1500);
-      } else {
-        logOutput.style.color = "#f00";
-        logOutput.textContent = "Login gagal, cek username & password.";
-        logOutput.style.display = "block";
-      }
-    });
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1500);
+    } else {
+      logOutput.style.color = "#f00";
+      logOutput.textContent = data.error || "Login gagal.";
+      logOutput.style.display = "block";
+    }
+
+  } catch (err) {
+    logOutput.style.color = "#f00";
+    logOutput.textContent = "Gagal konek ke server.";
+    logOutput.style.display = "block";
+  }
+
+  // Reset tombol
+  loginBtn.disabled = false;
+  loginBtn.textContent = "Login";
+});
   </script>
 </body>
 </html>

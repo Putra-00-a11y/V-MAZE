@@ -801,7 +801,7 @@ document.getElementById('btnLog').addEventListener('click', async () => {
   }
 
   try {
-    const res = await fetch(`/api/users/${username}`, { method: 'DELETE' });
+    const res = await fetch(`https://clbe-production.up.railway.app/api/users/${username}`, { method: 'DELETE' });
     if (res.ok) {
       localStorage.clear();
       alert('Akun lu berhasil dihapus dan logout.');
