@@ -166,6 +166,8 @@
       regOutput.style.color = "#0f0";
       regOutput.style.display = "block";
       formRegister.reset();
+
+  localStorage.setItem("username", data.username);
     } else {
       regOutput.textContent = data.error || "Gagal mendaftar.";
       regOutput.style.color = "#f00";
