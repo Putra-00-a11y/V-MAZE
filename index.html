@@ -815,12 +815,12 @@ document.getElementById('btnLog').addEventListener('click', async () => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-  const savedUsername = localStorage.getItem('vm_username');
+  const savedUsername = localStorage.getItem('username');
   if (savedUsername) {
     document.getElementById('usernameFeedback').value = savedUsername;
   }
 
-  const usern = localStorage.getItem("vm_username");
+  const usern = localStorage.getItem("username");
     if (usern) {
         // Udah login, sembunyikan tombol login
         logg.style.display = "none";
