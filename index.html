@@ -553,6 +553,33 @@
   </style>
 </head>
 <body>
+
+  <div id="custom-confirm" style="
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+">
+  <div style="
+    background: #111;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 0 10px red;
+  ">
+    <p id="confirm-msg" style="margin-bottom: 20px;"></p>
+    <button id="confirm-yes" style="padding: 8px 16px; background: crimson; border: none; color: white; border-radius: 5px; margin-right: 10px;">Ya, Hapus</button>
+    <button onclick="closeConfirm()" style="padding: 8px 16px; background: gray; border: none; color: white; border-radius: 5px;">Batal</button>
+  </div>
+</div>
+
   <div id="particles-js"></div> <!-- Partikel Background -->
 
     <div id="tsparticles"></div>
@@ -777,6 +804,41 @@
     });
   </script>  
 
+<script>
+  function showConfirm(msg, onConfirm) {
+    document.getElementById("confirm-msg").innerHTML = msg;
+    document.getElementById("custom-confirm").style.display = "flex";
+    document.getElementById("confirm-yes").onclick = () => {
+      closeConfirm();
+      onConfirm(); // kalau "Ya, Hapus" ditekan
+    };
+  }
+
+  function closeConfirm() {
+    document.getElementById("custom-confirm").style.display = "none";
+  }
+
+  function showAlert(msg) {
+    const alertBox = document.createElement("div");
+    alertBox.innerHTML = `
+      <div style="
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #0f0;
+        color: black;
+        padding: 10px 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px lime;
+        z-index: 9999;
+      ">${msg}</div>
+    `;
+    document.body.appendChild(alertBox);
+    setTimeout(() => alertBox.remove(), 2500);
+  }
+</script>
+
   <script>
     const bgToggle = document.getElementById('bgColorToggle');
 const warnaList = ['bg-warna-0', 'bg-warna-1', 'bg-warna-2', 'bg-warna-3', 'bg-warna-4'];
@@ -792,26 +854,30 @@ const feedbackStatus = document.getElementById('feedbackStatus');
 const isLoggedIn = localStorage.getItem("username");
 const subLinks = document.querySelectorAll('.sub-link');
 
-document.getElementById('btnLog').addEventListener('click', async () => {
-  const username = localStorage.getItem('username'); // asumsi username disimpan di sini
-
+document.getElementById('btnLog').addEventListener('click', () => {
+  const username = localStorage.getItem('username');
   if (!username) {
-    alert('Lu belum login bro!');
+    showAlert('⚠️ Lu belum login bro!');
     return;
   }
 
-  try {
-    const res = await fetch(`https://clbe-production.up.railway.app/api/users/${username}`, { method: 'DELETE' });
-    if (res.ok) {
-      localStorage.clear();
-      alert('Akun lu berhasil dihapus dan logout.');
-      window.location.href = 'login.html';
-    } else {
-      alert('Gagal hapus akun, coba lagi.');
+  showConfirm(`Yakin mau hapus akun <b>${username}</b>? semua data bakal hilang.`, async () => {
+    try {
+      const res = await fetch(`https://clbe-production.up.railway.app/api/users/${username}`, {
+        method: 'DELETE'
+      });
+
+      if (res.ok) {
+        localStorage.clear();
+        showAlert('✅ Akun berhasil dihapus!');
+        setTimeout(() => window.location.href = 'login.html', 2000);
+      } else {
+        showAlert('❌ Gagal hapus akun.');
+      }
+    } catch (err) {
+      showAlert('🚫 Error koneksi, coba lagi.');
     }
-  } catch (err) {
-    alert('Error network, coba lagi nanti.');
-  }
+  });
 });
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -877,19 +943,6 @@ feedbackForm.addEventListener('submit', function(e) {
     }, 2300);
   });
 });
-
-    log.addEventListener('click', () => {
-        const set = confirm('Yakin mau hapus akun? (Semua data bakal hilang!)');
-        if(set === true) {
-            setTimeout(() => {
-                localStorage.clear();
-                window.location.href = "login.html";
-            }, 1600);
-        }
-        else {  
-            return null;
-        }
-    });
 
 darkToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark-mode');
