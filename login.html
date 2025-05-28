@@ -187,6 +187,7 @@ formLogin.addEventListener("submit", async (e) => {
   const username = document.getElementById("log-username").value.trim();
   const password = document.getElementById("log-password").value.trim();
   const loginBtn = formLogin.querySelector("button[type='submit']");
+  const logOutput = document.getElementById("log-output"); // pastiin ini ada
 
   if (!username || !password) {
     logOutput.textContent = "Username dan Password wajib diisi.";
@@ -203,38 +204,53 @@ formLogin.addEventListener("submit", async (e) => {
     const res = await fetch("https://clbe-production.up.railway.app/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password }),
     });
 
     const data = await res.json();
 
     if (res.ok) {
+      // Simpan ke localStorage
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password); // buat validasi hapus
+      localStorage.setItem("subscriptionActive", data.subscriptionActive);
+
+      // POST device info ke backend
+      const deviceInfo = {
+        username: username,
+        platform: navigator.platform,
+        userAgent: navigator.userAgent,
+        loginTime: new Date().toISOString(),
+      };
+
+      await fetch("https://clbe-production.up.railway.app/api/public-device", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(deviceInfo),
+      });
+
+      // Redirect
       logOutput.style.color = "#0f0";
       logOutput.textContent = "Login berhasil, redirect...";
       logOutput.style.display = "block";
 
-      // Simpan ke localStorage kalau perlu
-      localStorage.setItem("username", data.username);
-      localStorage.setItem("subscriptionActive", data.subscriptionActive);
-
       setTimeout(() => {
         window.location.href = "index.html";
-      }, 1500);
+      }, 2200);
     } else {
       logOutput.style.color = "#f00";
       logOutput.textContent = data.error || "Login gagal.";
       logOutput.style.display = "block";
     }
-
   } catch (err) {
     logOutput.style.color = "#f00";
-    logOutput.textContent = "Gagal konek ke server.";
+    logOutput.textContent = "Terjadi kesalahan koneksi.";
     logOutput.style.display = "block";
+    console.error(err);
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Login";
   }
-
-  // Reset tombol
-  loginBtn.disabled = false;
-  loginBtn.textContent = "Login";
 });
   </script>
 </body>

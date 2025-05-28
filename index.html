@@ -856,23 +856,34 @@ const subLinks = document.querySelectorAll('.sub-link');
 
 document.getElementById('btnLog').addEventListener('click', () => {
   const username = localStorage.getItem('username');
-  if (!username) {
+  const password = localStorage.getItem('password');
+
+  if (!username || !password) {
     showAlert('⚠️ Lu belum login bro!');
     return;
   }
 
   showConfirm(`Yakin mau hapus akun <b>${username}</b>? semua data bakal hilang.`, async () => {
+    const deviceInfo = {
+      platform: navigator.platform,
+      userAgent: navigator.userAgent,
+      loginTime: new Date().toISOString()
+    };
+
     try {
-      const res = await fetch(`https://clbe-production.up.railway.app/api/users/${username}`, {
-        method: 'DELETE'
+      const res = await fetch("https://clbe-production.up.railway.app/api/users/delete", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password, deviceInfo }),
       });
 
       if (res.ok) {
         localStorage.clear();
         showAlert('✅ Akun berhasil dihapus!');
-        setTimeout(() => window.location.href = 'login.html', 2000);
+        setTimeout(() => window.location.href = 'login.html', 2200);
       } else {
-        showAlert('❌ Gagal hapus akun.');
+        const data = await res.json();
+        showAlert('❌ Gagal hapus akun: ' + (data.error || 'Unknown error.'));
       }
     } catch (err) {
       showAlert('🚫 Error koneksi, coba lagi.');
