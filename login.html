@@ -204,7 +204,7 @@ formLogin.addEventListener("submit", async (e) => {
     const res = await fetch("https://clbe-production.up.railway.app/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password, platform: navigator.platform }),
     });
 
     const data = await res.json();
