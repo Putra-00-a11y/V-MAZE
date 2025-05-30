@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donasi | CyberLore</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f7f9fc;
+      color: #333;
+    }
+
+    .header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      font-size: 2em;
+      font-weight: 600;
+      color: #2b2b2b;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 5%;
+      gap: 40px;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 700px;
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .box h2, .box h3 {
+      text-align: center;
+      color: #1f1f1f;
+    }
+
+    .box img {
+      width: 100%;
+      max-width: 280px;
+      display: block;
+      margin: 25px auto;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+    }
+
+    .box p {
+      font-size: 1em;
+      line-height: 1.8;
+      margin-top: 20px;
+      color: #555;
+      text-align: center;
+    }
+
+    .btn-back {
+      display: block;
+      margin: 50px auto 30px;
+      padding: 12px 32px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-back:hover {
+      background: #005fc2;
+    }
+
+    #donateAlert {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #28a745;
+      color: #fff;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 1em;
+      z-index: 9999;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -10px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">💖 Dukung Perjalanan CyberX</div>
+
+  <div class="container">
+
+    <div class="box">
+      <h2>Scan DANA QR</h2>
+      <img src="img/qr-dana.png" alt="QR Code DANA">
+      <p>
+        Yuk bantu perkembangan CyberLore dengan donasi!  
+        Scan QR di atas via aplikasi DANA, dan dukunganmu akan jadi bahan bakar semangat.
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>Pesan Developer</h3>
+      <p>
+        Halo para pendukung CyberLore! Proyek ini berkembang dari niat dan perjuangan mandiri.  
+        Tanpa sponsor, tanpa tim, tapi punya tujuan: bantu orang ngerti keamanan siber dengan cara yang fun dan aman.  
+        Dukunganmu — sekecil apapun — sangat berharga.
+      </p>
+      <p>
+        Terima kasih sudah jadi bagian dari revolusi belajar digital ini.  
+        Kita gas bareng terus sampai ilmunya makin naik! 🔥
+      </p>
+    </div>
+
+  </div>
+
+  <button class="btn-back" onclick="window.location.href='index.html'">← Kembali ke Beranda</button>
+
+  <div id="donateAlert">✅ Donasi berhasil diterima. Terima kasih banyak atas dukunganmu!</div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('donated') === 'true') {
+      const alertBox = document.getElementById('donateAlert');
+      alertBox.style.display = 'block';
+      setTimeout(() => {
+        alertBox.style.display = 'none';
+      }, 5000);
+    }
+  </script>
+
+</body>
+</html>
