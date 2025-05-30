@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CS - CyberX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset simple */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f7f9fc;
+      color: #374151;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.4rem;
+      color: #2563eb;
+      margin-bottom: 25px;
+      letter-spacing: 1.2px;
+      user-select: none;
+    }
+
+    main {
+      flex: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      padding: 30px 35px;
+      box-shadow: 0 8px 30px rgb(100 100 111 / 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* FAQ style */
+    .faq {
+      user-select: none;
+    }
+
+    .faq h2 {
+      color: #2563eb;
+      font-weight: 700;
+      margin-bottom: 16px;
+      font-size: 1.8rem;
+      border-bottom: 3px solid #2563eb;
+      padding-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .faq-item {
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 15px;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+      background: #f9fafb;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.04);
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 8px 20px rgb(37 99 235 / 0.25);
+    }
+
+    .faq-item h3 {
+      padding: 16px 22px;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #1e40af;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 22px;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #4b5563;
+      transition: max-height 0.35s ease, padding 0.3s ease;
+      background: #fff;
+    }
+
+    .faq-answer.open {
+      max-height: 300px;
+      padding: 12px 22px 20px;
+    }
+
+    /* Icon toggle */
+    .faq-icon {
+      font-weight: 700;
+      color: #2563eb;
+      font-size: 1.2rem;
+      user-select: none;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-icon.rotate {
+      transform: rotate(45deg);
+    }
+
+    /* Contact Form */
+    .contact-form h2 {
+      color: #2563eb;
+      font-weight: 700;
+      margin-bottom: 18px;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    label {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #374151;
+    }
+
+    input, textarea {
+      padding: 12px 15px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 2px solid #e5e7eb;
+      resize: vertical;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+      background: #f9fafb;
+      color: #111827;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      background: #fff;
+      box-shadow: 0 0 8px rgb(37 99 235 / 0.3);
+    }
+
+    textarea {
+      min-height: 110px;
+    }
+
+    button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 14px 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    button:hover {
+      background-color: #1e40af;
+    }
+
+    .btn-back {
+      margin: 30px auto 0;
+      max-width: 720px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .btn-back a {
+      background: #ef4444;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .btn-back a:hover {
+      background: #b91c1c;
+    }
+
+    /* Alert success */
+    #alertSuccess {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #4ade80;
+      color: #064e3b;
+      padding: 15px 25px;
+      border-radius: 15px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgb(74 222 128 / 0.6);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      z-index: 999;
+    }
+    #alertSuccess.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 25px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>Customer Service CyberX</header>
+
+  <main>
+    <section class="faq" aria-label="Frequently Asked Questions">
+      <h2>FAQ - Pertanyaan Umum</h2>
+      
+      <div class="faq-item" tabindex="0">
+        <h3>
+          Apa itu CyberX? 
+          <span class="faq-icon">+</span>
+        </h3>
+        <div class="faq-answer" aria-hidden="true">
+          CyberX adalah platform belajar keamanan siber yang membantu pemula hingga pro memahami cybersecurity dengan cara mudah dan praktis.
+        </div>
+      </div>
+
+      <div class="faq-item" tabindex="0">
+        <h3>
+          Bagaimana cara berdonasi? 
+          <span class="faq-icon">+</span>
+        </h3>
+        <div class="faq-answer" aria-hidden="true">
+          Kunjungi halaman <a href="/donate.html" style="color:#2563eb; text-decoration:underline;">Donasi</a> dan scan QR Code DANA untuk dukunganmu.
+        </div>
+      </div>
+
+      <div class="faq-item" tabindex="0">
+        <h3>
+          Apakah materi CyberX cocok untuk pemula? 
+          <span class="faq-icon">+</span>
+        </h3>
+        <div class="faq-answer" aria-hidden="true">
+          Iya, materi dirancang dari dasar sampai tingkat lanjut agar semua bisa belajar tanpa kebingungan.
+        </div>
+      </div>
+
+      <div class="faq-item" tabindex="0">
+        <h3>
+          Bagaimana cara menghubungi tim CyberX? 
+          <span class="faq-icon">+</span>
+        </h3>
+        <div class="faq-answer" aria-hidden="true">
+          Isi form di bawah ini untuk kirim pesan langsung ke tim kami, kami akan balas secepatnya.
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-form" aria-label="Formulir Kontak">
+      <h2>Hubungi Kami</h2>
+      <form id="contactForm">
+        <label for="name">Nama Lengkap</label>
+        <input type="text" id="name" name="user_name" placeholder="Masukkan nama lengkapmu" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="user_email" placeholder="Masukkan emailmu" required />
+
+        <label for="message">Pesan</label>
+        <textarea id="message" name="message" placeholder="Tulis pesanmu di sini..." required></textarea>
+
+        <button type="submit">Kirim Pesan</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="alertSuccess">Pesan berhasil dikirim! Terima kasih 🙌</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    // Inisialisasi EmailJS
+    (function(){
+      emailjs.init('RPz5LSVBD-R2-lLrg'); // Ganti YOUR_USER_ID dengan user ID EmailJS-mu
+    })();
+
+    // Toggle FAQ
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const header = item.querySelector('h3');
+      const icon = item.querySelector('.faq-icon');
+      const answer = item.querySelector('.faq-answer');
+      header.addEventListener('click', () => {
+        const isOpen = answer.classList.contains('open');
+        if(isOpen) {
+          answer.classList.remove('open');
+          icon.classList.remove('rotate');
+          answer.setAttribute('aria-hidden', 'true');
+        } else {
+          answer.classList.add('open');
+          icon.classList.add('rotate');
+          answer.setAttribute('aria-hidden', 'false');
+        }
+      });
+      // Keyboard accessibility
+      item.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          header.click();
+          e.preventDefault();
+        }
+      });
+    });
+
+    // Form kirim email
+    const contactForm = document.getElementById('contactForm');
+    const alertSuccess = document.getElementById('alertSuccess');
+
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Mengirim...";
+
+      emailjs.sendForm('service_gao2wqz', 'template_56tf5ib', this)
+        .then(() => {
+          alertSuccess.classList.add('show');
+          contactForm.reset();
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Kirim Pesan";
+
+          setTimeout(() => {
+            alertSuccess.classList.remove('show');
+          }, 4000);
+        }, (error) => {
+          alert("Error saat mengirim pesan, coba lagi nanti.");
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Kirim Pesan";
+          console.error(error);
+        });
+    });
+  </script>
+
+</body>
+</html>
