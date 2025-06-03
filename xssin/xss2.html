@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XSSin Challenge Level 2 - Stored XSS</title>
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: monospace, monospace;
+      padding: 20px;
+    }
+    #hintBox {
+      display: none;
+      background: #222;
+      border: 1px solid #444;
+      padding: 15px;
+      margin-bottom: 20px;
+      color: #aaa;
+    }
+    #output {
+      margin-top: 20px;
+      border: 1px solid #555;
+      background: #1a1a1a;
+      padding: 10px;
+      min-height: 80px;
+      color: #eee;
+      word-break: break-word;
+    }
+    button {
+      background: #444;
+      border: none;
+      color: #eee;
+      padding: 10px 15px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    button:hover {
+      background: #666;
+    }
+    input[type=text] {
+      width: 75%;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #555;
+      color: #eee;
+    }
+    section {
+      margin-bottom: 25px;
+    }
+    h2 {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 5px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>XSSin Challenge Level 2 - Stored XSS</h1>
+
+  <button id="helpBtn">Bantuan?</button>
+  <div id="hintBox">
+    <p>Stored XSS adalah payload yang tersimpan di server dan akan dieksekusi setiap halaman diakses ulang.</p>
+    <p>Di sini kita simulasikan penyimpanan dengan <code>localStorage</code>.</p>
+    <p><strong>Goal</strong>: Buat payload <code>alert</code> dengan menggunakan <code>&lt;script&gt;</code> dan teks "XSSin Level 2" didalamnya</p>
+  </div>
+
+  <input type="text" id="userInput" placeholder="Masukkan payload XSS untuk disimpan" autocomplete="off" />
+  <button id="submitBtn">Submit & Simpan</button>
+
+  <div id="output"></div>
+
+  <script>
+    const submitBtn = document.getElementById('submitBtn');
+    const helpBtn = document.getElementById('helpBtn');
+    const output = document.getElementById('output');
+    const hintBox = document.getElementById('hintBox');
+    const userInput = document.getElementById('userInput');
+
+    // Fungsi untuk tampilkan payload yang disimpan di output
+    function loadPayload() {
+      const savedPayload = localStorage.getItem('xssLevel2Payload');
+      if (savedPayload) {
+        output.innerHTML = savedPayload;
+      } else {
+        output.innerHTML = '<i>Tidak ada payload tersimpan.</i>';
+      }
+    }
+
+    // Load payload saat halaman dibuka
+    loadPayload();
+
+    helpBtn.addEventListener('click', () => {
+      hintBox.style.display = hintBox.style.display === 'block' ? 'none' : 'block';
+    });
+
+    submitBtn.addEventListener('click', () => {
+      const input = userInput.value;
+
+      // Simpan ke localStorage (simulasi stored XSS)
+      localStorage.setItem('xssLevel2Payload', input);
+
+      // Tampilkan di output
+      output.innerHTML = input;
+
+      // Cek payload alert 'XSSin Level 2'
+      const regex = /<script>\s*alert\(['"]XSSin Level 2['"]\)\s*<\/script>/i;
+      if (regex.test(input)) {
+        alert('Selamat! Challenge Level 2 berhasil!');
+        setTimeout(() => {
+          window.location.href = '/xssin.html';
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>

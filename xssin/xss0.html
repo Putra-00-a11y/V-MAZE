@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XSSin Level 0 - Challenge</title>
+  <style>
+    body {
+      background: #111;
+      color: #99fff5;
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background: #222;
+      border: 1px solid #444;
+      color: #99fff5;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    button {
+      background: #1a9fff;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    #hintBox {
+      background: #222;
+      border: 1px solid #1a9fff;
+      padding: 10px;
+      margin-top: 15px;
+      display: none;
+      color: #a3f0ff;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>XSSin Level 0 - Basic Input</h1>
+  <p>Masukkan input yang akan ditampilkan di bawah ini:</p>
+  
+  <input type="text" id="userInput" placeholder="Coba masukkan sesuatu..." />
+  <button id="submitBtn">Submit</button>
+  <button id="helpBtn">Bantuan?</button>
+
+  <div id="output" style="margin-top:20px; padding:10px; background:#222; border-radius:4px;"></div>
+  
+  <div id="hintBox">
+    <h3>Kisi-Kisi Level 0:</h3>
+    <ul>
+      <li>Coba masukkan tag HTML sederhana seperti <code>&lt;b&gt;bold&lt;/b&gt;</code>.</li>
+      <li>Input akan ditampilkan apa adanya, jadi coba eksplorasi.</li>
+      <li><strong>Goal</strong>: buat alert dengan <code>&lt;script&gt;alert('XSSin Level 0')&lt;/script&gt;</code>.</li>
+    </ul>
+  </div>
+
+  <script>
+    const submitBtn = document.getElementById('submitBtn');
+    const helpBtn = document.getElementById('helpBtn');
+    const output = document.getElementById('output');
+    const hintBox = document.getElementById('hintBox');
+    const userInput = document.getElementById('userInput');
+
+    helpBtn.addEventListener('click', () => {
+      hintBox.style.display = hintBox.style.display === 'block' ? 'none' : 'block';
+    });
+
+    submitBtn.addEventListener('click', () => {
+  const input = userInput.value;
+  // tampilkan input apa adanya (vulnerable XSS simulation)
+  output.innerHTML = input;
+
+  // regex cek payload alert XSSin Level 0 di dalam <script>
+  const regex = /<script>\s*alert\(['"]XSSin Level 0['"]\)\s*<\/script>/i;
+
+  if (regex.test(input)) {
+    // custom alert
+    alert('Selamat! Challenge Level 0 berhasil!');
+    // redirect setelah 2 detik
+    setTimeout(() => {
+      window.location.href = '/xssin.html';
+    }, 2000);
+  }
+});
+  </script>
+</body>
+</html>

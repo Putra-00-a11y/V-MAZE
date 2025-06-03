@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XSSin Challenge Level 1</title>
+  <style>
+    body {
+      background: #121212;
+      color: #eee;
+      font-family: monospace, monospace;
+      padding: 20px;
+    }
+    #hintBox {
+      display: none;
+      background: #222;
+      border: 1px solid #444;
+      padding: 15px;
+      margin-bottom: 20px;
+      color: #aaa;
+    }
+    #output {
+      margin-top: 20px;
+      border: 1px solid #555;
+      background: #1a1a1a;
+      padding: 10px;
+      min-height: 80px;
+      color: #eee;
+      word-break: break-word;
+    }
+    button {
+      background: #444;
+      border: none;
+      color: #eee;
+      padding: 10px 15px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    button:hover {
+      background: #666;
+    }
+    input[type=text] {
+      width: 80%;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #555;
+      color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <h1>XSSin Challenge Level 1</h1>
+  <p>Masukkan payload XSS yang memicu alert <code>'XSSin Level 1'</code> tanpa menggunakan tag &lt;script&gt;.</p>
+
+  <button id="helpBtn">Bantuan?</button>
+  <div id="hintBox">
+    <p>Coba gunakan tag gambar <code>&lt;img&gt;</code> dengan event handler <code>onerror</code> untuk memicu alert.</p>
+  </div>
+
+  <input type="text" id="userInput" placeholder="Masukkan payload XSS di sini" autocomplete="off" />
+  <button id="submitBtn">Submit</button>
+
+  <div id="output"></div>
+
+  <script>
+    const submitBtn = document.getElementById('submitBtn');
+    const helpBtn = document.getElementById('helpBtn');
+    const output = document.getElementById('output');
+    const hintBox = document.getElementById('hintBox');
+    const userInput = document.getElementById('userInput');
+
+    helpBtn.addEventListener('click', () => {
+      hintBox.style.display = hintBox.style.display === 'block' ? 'none' : 'block';
+    });
+
+    submitBtn.addEventListener('click', () => {
+      const input = userInput.value;
+      // tampilkan input apa adanya (simulate XSS vulnerability)
+      output.innerHTML = input;
+
+      // regex cek payload alert XSSin Level 1 pakai img onerror
+      const regex = /<img[^>]+onerror\s*=\s*alert\(['"]XSSin Level 1['"]\)[^>]*>/i;
+
+      if (regex.test(input)) {
+        alert('Selamat! Challenge Level 1 berhasil!');
+        setTimeout(() => {
+          window.location.href = '/xssin.html';
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>

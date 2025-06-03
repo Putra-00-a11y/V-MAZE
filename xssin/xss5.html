@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XSSin Challenge Level 5 - Payload Intermediate</title>
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #eee;
+      font-family: monospace;
+      padding: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin-top: 10px;
+      background: #222;
+      color: #eee;
+      border: 1px solid #444;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      background: #1c1c1c;
+      border: 1px solid #555;
+      min-height: 50px;
+    }
+    #hintBox {
+      display: none;
+      margin-top: 20px;
+      background: #222;
+      padding: 15px;
+      border: 1px solid #555;
+      color: #ccc;
+    }
+    button:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>XSSin Challenge Level 5 - Payload Intermediate</h1>
+
+  <input type="text" id="userInput" placeholder="Masukkan payload di sini" />
+  <button id="submitBtn">Submit</button>
+  <button id="helpBtn">Bantuan?</button>
+
+  <div id="hintBox">
+    <p>Coba eksplorasi event handler seperti <code>onmouseover</code>, <code>onerror</code>, <code>onclick</code>.</p>
+    <p><strong>Goal</strong>: Payload kali ini berbeda dari sebelumnya. Buat payload dengan pendekatan <code>eventlistener</code> pada elemen/tag DOM dan jangan lupa isi alert yaitu "XSSin Level 5".</p>
+  </div>
+
+  <div id="output"><i>Output akan tampil di sini...</i></div>
+
+  <script>
+    const submitBtn = document.getElementById('submitBtn');
+    const helpBtn = document.getElementById('helpBtn');
+    const userInput = document.getElementById('userInput');
+    const output = document.getElementById('output');
+    const hintBox = document.getElementById('hintBox');
+
+    helpBtn.addEventListener('click', () => {
+      hintBox.style.display = hintBox.style.display === 'block' ? 'none' : 'block';
+    });
+
+    function simpleFilter(input) {
+      // Filter dasar yang tetap bisa dibypass
+      return input
+        .replace(/<script/gi, '')
+        .replace(/<\/script>/gi, '')
+        .replace(/alert/, '');
+    }
+
+    submitBtn.addEventListener('click', () => {
+      let input = userInput.value;
+      let filtered = simpleFilter(input);
+
+      // tampilkan raw di output
+      output.innerHTML = decodeURIComponent(filtered);
+
+      // validasi sukses via string match manual (di dunia nyata tentu gak gini)
+      if (
+        input.toLowerCase(filtered(input)).includes("alert('xssin level 5')") ||
+        input.toLowerCase(filtered(input)).includes('alert("xssin level 5")')
+      ) {
+        alert('Selamat! Challenge Level 5 berhasil!');
+        setTimeout(() => {
+          window.location.href = '/xssin.html';
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>

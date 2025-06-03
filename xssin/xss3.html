@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XSSin Challenge Level 3 - URL Based XSS</title>
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: monospace, monospace;
+      padding: 20px;
+    }
+    #hintBox {
+      display: none;
+      background: #222;
+      border: 1px solid #444;
+      padding: 15px;
+      margin-bottom: 20px;
+      color: #aaa;
+    }
+    #output {
+      margin-top: 20px;
+      border: 1px solid #555;
+      background: #1a1a1a;
+      padding: 10px;
+      min-height: 80px;
+      color: #eee;
+      word-break: break-word;
+    }
+    button {
+      background: #444;
+      border: none;
+      color: #eee;
+      padding: 10px 15px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    button:hover {
+      background: #666;
+    }
+    section {
+      margin-bottom: 25px;
+    }
+    h2 {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 5px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>XSSin Challenge Level 3 - URL Based XSS</h1>
+
+  <button id="helpBtn">Bantuan?</button>
+  <div id="hintBox">
+    <p>DOM-based XSS terjadi saat input dari user (URL) dimanipulasi langsung ke dalam DOM tanpa filter.</p>
+    <p><strong>Goal</strong>: Manipulasi URL dengan menambahkan <code>?msg=</code> dan buat payload <code>alert</code> di <code>&lt;script&gt;</code>, dengan isi teks "XSSin Level 3"</p>
+  </div>
+
+  <div id="output"></div>
+
+  <script>
+    const helpBtn = document.getElementById('helpBtn');
+    const output = document.getElementById('output');
+    const hintBox = document.getElementById('hintBox');
+
+    helpBtn.addEventListener('click', () => {
+      hintBox.style.display = hintBox.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Ambil parameter dari URL
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get('msg');
+
+    if (msg) {
+      output.innerHTML = msg;
+
+      // cek keberhasilan payload
+      const regex = /<script>\s*alert\(['"]XSSin Level 3['"]\)\s*<\/script>/i;
+      if (regex.test(msg)) {
+        alert('Selamat! Challenge Level 3 berhasil!');
+        setTimeout(() => {
+          window.location.href = '/xssin.html';
+        }, 2000);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CyberX - Modul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+  <style>
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      background: #0a0a0a;
+      font-family: 'Orbitron', sans-serif;
+      color: #eee;
+      overflow-x: hidden;
+      position: relative;
+      z-index: 1;
+    }
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      z-index: 0;
+      background: #0a0a0a;
+    }
+    h1 {
+      position: relative;
+      text-align: center;
+      margin-top: 50px;
+      font-size: 3.5em;
+      color: #00ffc8;
+      text-shadow: 0 0 15px #00ffc8, 0 0 25px #00ffc8;
+      z-index: 2;
+    }
+    .container {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      padding: 60px 80px 100px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: rgba(0,255,200,0.1);
+      border: 2px solid #00ffc8;
+      border-radius: 20px;
+      padding: 30px 25px;
+      box-shadow:
+        0 0 20px #00ffc8aa,
+        inset 0 0 15px #00ffc8bb;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      color: #c1f9f1;
+    }
+    .card:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow:
+        0 0 30px #00ffc8ee,
+        inset 0 0 20px #00ffc8ff;
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 2em;
+      color: #00ffc8;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px #00ffc8;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .card h2 .fa-shield-alt {
+      color: #facc15;
+      text-shadow: 0 0 5px #facc15;
+    }
+    .desc {
+      font-size: 1.1em;
+      line-height: 1.4em;
+      margin-bottom: 18px;
+      color: #99fff5dd;
+    }
+    .level {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1em;
+      margin-bottom: 18px;
+      gap: 8px;
+      color: #facc15;
+      text-shadow: 0 0 5px #facc15;
+    }
+    .level .fa-circle {
+      font-size: 0.8em;
+    }
+    .btn {
+      display: inline-block;
+      background: #00ffc8;
+      color: #0a0a0a;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-weight: 900;
+      font-size: 1.1em;
+      text-decoration: none;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px #00ffc8cc;
+      transition: background 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    .btn:hover {
+      background: #0ff;
+      color: #111;
+      box-shadow: 0 0 20px #00fffaaa;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="particles-js"></div>
+
+  <h1>Modul CyberX</h1>
+
+  <div class="container">
+
+    <div class="card" tabindex="0">
+      <h2><i class="fas fa-shield-alt"></i> XSSin</h2>
+      <div class="desc">Modul pemula yang membahas Cross Site Scripting dengan tantangan interaktif yang asik dan menantang.</div>
+      <div class="level">
+        <i class="fas fa-circle" style="color:#facc15;"></i> Beginner
+      </div>
+      <a class="btn" href="xssin.html">Masuk</a>
+    </div>
+
+    <div class="card" tabindex="0">
+      <h2><i class="fas fa-shield-alt"></i> Obelisk</h2>
+      <div class="desc">Modul tingkat menengah yang fokus pada eksploitasi file dan privilege escalation.</div>
+      <div class="level">
+        <i class="fas fa-circle" style="color:#facc15;"></i> Intermediate
+      </div>
+      <a class="btn" href="obelisk.html">Masuk</a>
+    </div>
+
+    <!-- Bisa tambah modul baru disini -->
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#00ffc8" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 120, color: "#00ffc8", opacity: 0.15, width: 1 },
+        move: { enable: true, speed: 1.5, direction: "none", random: false, straight: false, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 0.3 } },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+
+</body>
+</html>

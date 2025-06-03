@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XSSin Challenge Level 4 - Filter Bypass Basic</title>
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #eee;
+      font-family: monospace;
+      padding: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin-top: 10px;
+      background: #222;
+      color: #eee;
+      border: 1px solid #444;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      background: #1c1c1c;
+      border: 1px solid #555;
+      min-height: 50px;
+    }
+    #hintBox {
+      display: none;
+      margin-top: 20px;
+      background: #222;
+      padding: 15px;
+      border: 1px solid #555;
+      color: #ccc;
+    }
+    button:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>XSSin Challenge Level 4 - Filter Bypass Basic</h1>
+
+  <input type="text" id="userInput" placeholder="Masukkan payload di sini" />
+  <button id="submitBtn">Submit</button>
+  <button id="helpBtn">Bantuan?</button>
+
+  <div id="hintBox">
+    <p>Coba gunakan URL encoding: contoh <code>%3Cscript%3E</code> untuk <code>&lt;script&gt;</code>.</p>
+    <p>Atau karakter alternatif seperti <code>''</code> dan penggunaan tag lain (event handler juga bisa).</p>
+    <p><strong>Goal</strong>: Exploit input yang telah terfilter tersebut!. Jangan lupa teks dari <code>alert</code> berisi "XSSin Level 4"</p>
+  </div>
+
+  <div id="output"><i>Output akan tampil di sini...</i></div>
+
+  <script>
+    const submitBtn = document.getElementById('submitBtn');
+    const helpBtn = document.getElementById('helpBtn');
+    const userInput = document.getElementById('userInput');
+    const output = document.getElementById('output');
+    const hintBox = document.getElementById('hintBox');
+
+    helpBtn.addEventListener('click', () => {
+      hintBox.style.display = hintBox.style.display === 'block' ? 'none' : 'block';
+    });
+
+    function simpleFilter(input) {
+      // Filter dasar yang tetap bisa dibypass
+      return input
+        .replace(/<script/gi, '')
+        .replace(/<\/script>/gi, '')
+        .replace(/</g, '')
+        .replace(/>/g, '')
+        .replace(/alert/, '');
+    }
+
+    submitBtn.addEventListener('click', () => {
+      let input = userInput.value;
+      let filtered = simpleFilter(input);
+
+      // tampilkan setelah "difilter"
+      output.innerHTML = decodeURIComponent(filtered);
+
+      // cek apakah payload berhasil
+      if (
+        input.toLowerCase(simpleFilter).includes("alert('xssin level 4')") ||
+        input.toLowerCase(filtered).includes  ('alert("xssin level 4")')
+      ) {
+        alert('Selamat! Challenge Level 4 berhasil!');
+        setTimeout(() => {
+          window.location.href = '/xssin.html';
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>
