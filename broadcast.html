@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirim Notifikasi - CyberX</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      color: #00ffe7;
+      text-shadow: 0 0 10px #00ffe7;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.6rem;
+      border: 1px solid #00ffe740;
+      border-radius: 8px;
+      background: #121212;
+      color: #fff;
+    }
+
+    button {
+      background: #00ffe7;
+      color: #000;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .status {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔔 Kirim Notifikasi ke Semua Device</h1>
+  <input type="text" id="title" placeholder="Judul Notifikasi" required />
+  <textarea id="body" rows="4" placeholder="Isi Pesan Notifikasi"></textarea>
+  <button onclick="sendNotif()">Kirim 🔥</button>
+
+  <div class="status" id="status"></div>
+
+  <script>
+    async function sendNotif() {
+      const title = document.getElementById("title").value;
+      const body = document.getElementById("body").value;
+
+      const res = await fetch("https://clbe-production.up.railway.app/sendNotification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, body })
+      });
+
+      const msg = await res.json();
+      document.getElementById("status").innerText = "✅ Notif Terkirim!";
+    }
+  </script>
+</body>
+</html>
