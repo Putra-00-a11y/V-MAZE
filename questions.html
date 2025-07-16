@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberX - Pilihan Soal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Share Tech Mono', monospace;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-top: 2rem;
+      font-size: 2rem;
+      color: #00ffe7;
+      text-shadow: 0 0 10px #00ffe7;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .card {
+      margin: 2px;
+      background: #121212;
+      border: 1px solid #00ffe750;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 12px #00ffe733;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card img {
+      width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0;
+      image-rendering: optimizeQuality;
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      color: #00ffe7;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .card button {
+      background: #00ffe7;
+      border: none;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .card button:hover {
+      background: #00cfc2;
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      background: transparent;
+      border: 2px solid #00ffe7;
+      color: #00ffe7;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .back-btn:hover {
+      background: #00ffe7;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Soal Dasar Keamanan Siber</h1>
+
+  <div class="card-container">
+    <div class="card" data-tilt data-tilt-scale="1" data-tilt-max="12">
+      <img src="image/terminal.png" alt="Soal Terminal">
+      <h2>Dasar Terminal</h2>
+      <p>Pahami konsep Terminal dasar dan sederhana. Kerjakan soal-soal sesuai kemampuan yang telah kamu pelajari.</p>
+      <button onclick="animateAndGo(this, 'questions/terminal.html')">Kerjakan</button>
+    </div>
+
+    <div class="card" data-tilt data-tilt-scale="1" data-tilt-max="12">
+      <img src="assets/csrf.png" alt="Soal CSRF">
+      <h2>Pengenalan CSRF</h2>
+      <p>Pelajari celah manipulasi request antar situs.</p>
+      <button onclick="animateAndGo(this, 'questions/xss0.html')">Kerjakan</button>
+    </div>
+
+    <div class="card" data-tilt data-tilt-scale="1" data-tilt-max="12">
+      <img src="assets/tools.png" alt="Tools Dasar">
+      <h2>Tools Dasar</h2>
+      <p>Kenali tools penting dalam investigasi & exploitasi.</p>
+      <button onclick="animateAndGo(this, 'questions/xss0.html')">Kerjakan</button>
+    </div>
+
+    <!-- Tambahin lebih banyak card soal di sini -->
+  </div>
+
+  <button class="back-btn" onclick="location.href='index.html'">⬅️ Kembali ke Beranda</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script>
+    function animateAndGo(btn, link) {
+      const card = btn.closest('.card');
+  
+    gsap.to(card, {
+      rotationY: 90,
+      opacity: 0,
+      duration: 0.5,
+      ease: "back.in(1.7)",
+      onComplete: () => setTimeout(() => {window.location.href = link}, 700 )
+    });
+
+    gsap.to(card, {
+      rotationY: 180,
+      opacity: 0,
+      duration: 0.55,
+      ease: "power3.in"
+    });
+
+    gsap.to(card, {
+      filter: "blur(10px)",
+      opacity: 0,
+      duration: 0.6,
+      ease: "power1.in"
+    });
+
+    gsap.to("body", {
+      scale: 2,
+      opacity: 0,
+      duration: 0.65,
+      ease: "back.in(2)"
+    });
+    }
+  </script>  
+  <script>
+    // Cek status pengerjaan soal dari localStorage
+    window.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".card");
+  
+      cards.forEach(card => {
+        const title = card.querySelector("h2")?.textContent || "";
+        const btn = card.querySelector("button");
+  
+        // Gunakan key sesuai nama soal
+        if (title.includes("Terminal") && localStorage.getItem("terminalQuizDone")) {
+          btn.disabled = true;
+          btn.textContent = "Sudah Dikerjakan";
+          btn.style.background = "#444";
+          btn.style.color = "#888";
+          btn.style.cursor = "not-allowed";
+        }
+  
+        // Tambahkan else if untuk soal lain kalau mau deteksi juga
+        // else if (title.includes("CSRF") && localStorage.getItem("csrfQuizDone")) { ... }
+      });
+    });
+  </script>  
+</body>
+</html>

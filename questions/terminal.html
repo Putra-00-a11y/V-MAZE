@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz: Dasar Terminal - CyberX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      background-color: #0a0a0a;
+      color: #e0e0e0;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #00ffe7;
+      text-shadow: 0 0 10px #00ffe7;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .question {
+      margin-bottom: 2rem;
+      background: #121212;
+      padding: 1rem;
+      border: 1px solid #00ffe740;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #00ffe722;
+    }
+
+    .question h3 {
+      color: #00ffe7;
+      margin-bottom: 0.8rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      margin-right: 0.5rem;
+    }
+
+    .submit-btn {
+      display: block;
+      margin: 2rem auto;
+      padding: 0.7rem 1.5rem;
+      background: #00ffe7;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: #00cfc2;
+    }
+
+    .submit-btn:disabled {
+      background: #444;
+      color: #888;
+      cursor: not-allowed;
+    }
+
+    .result {
+      text-align: center;
+      font-size: 1.4rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🖥️ Kuis Dasar Terminal</h1>
+
+  <form id="quizForm">
+    <!-- Soal-soal di-generate lewat JS -->
+  </form>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    const quizData = [
+      { q: "Perintah untuk melihat isi direktori saat ini adalah:", options: ["cd", "ls", "mkdir"], answer: 1 },
+      { q: "Perintah untuk berpindah direktori:", options: ["rm", "cd", "pwd"], answer: 1 },
+      { q: "Perintah untuk membuat direktori baru:", options: ["mkdir", "touch", "nano"], answer: 0 },
+      { q: "Perintah untuk menghapus file:", options: ["rm", "del", "remove"], answer: 0 },
+      { q: "Perintah untuk melihat lokasi direktori saat ini:", options: ["where", "dir", "pwd"], answer: 2 },
+      { q: "Perintah untuk menampilkan isi file:", options: ["cat", "ls", "mv"], answer: 0 },
+      { q: "Perintah untuk memindahkan atau mengganti nama file:", options: ["cp", "mv", "rn"], answer: 1 },
+      { q: "Perintah untuk menyalin file:", options: ["cp", "mv", "copy"], answer: 0 },
+      { q: "Perintah untuk keluar dari terminal:", options: ["logout", "exit", "quit"], answer: 1 },
+      { q: "File yang dimulai dengan titik (.) dalam Linux adalah:", options: ["file tersembunyi", "file rusak", "file system"], answer: 0 },
+      { q: "Perintah untuk membuka teks editor terminal:", options: ["nano", "cat", "code"], answer: 0 },
+      { q: "Perintah untuk melihat proses yang sedang berjalan:", options: ["ps", "run", "status"], answer: 0 },
+      { q: "Perintah untuk menghentikan proses berdasarkan PID:", options: ["kill", "stop", "terminate"], answer: 0 },
+      { q: "Perintah untuk menghapus direktori kosong:", options: ["rmdir", "rm", "deldir"], answer: 0 },
+      { q: "Perintah untuk membersihkan layar terminal:", options: ["clear", "cls", "wipe"], answer: 0 }
+    ];
+
+    const form = document.getElementById("quizForm");
+    const resultBox = document.getElementById("result");
+
+    quizData.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `
+        <h3>Soal ${index + 1}: ${item.q}</h3>
+        ${item.options.map((opt, i) => `
+          <label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>
+        `).join('')}
+      `;
+      form.appendChild(div);
+    });
+
+    const submit = document.createElement("button");
+    submit.type = "button";
+    submit.textContent = "Submit";
+    submit.className = "submit-btn";
+
+    const savedResult = localStorage.getItem("terminalQuizResult");
+
+    if (localStorage.getItem("terminalQuizDone")) {
+      submit.disabled = true;
+      submit.textContent = "Sudah Dikerjakan";
+      if (savedResult) resultBox.innerHTML = savedResult;
+      form.querySelectorAll("input").forEach(input => input.disabled = true);
+    }
+
+    submit.onclick = () => {
+      let score = 0;
+      quizData.forEach((item, i) => {
+        const selected = form.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && parseInt(selected.value) === item.answer) {
+          score += 1;
+        }
+      });
+      const percent = Math.round((score / quizData.length) * 100);
+      const resultHTML = `✅ Skor Kamu: ${percent}% (${score} dari ${quizData.length} benar)`;
+      resultBox.innerHTML = resultHTML;
+      form.querySelectorAll("input").forEach(input => input.disabled = true);
+      submit.disabled = true;
+      submit.textContent = "Sudah Dikerjakan";
+      localStorage.setItem("terminalQuizDone", true);
+      localStorage.setItem("terminalQuizResult", resultHTML);
+    };
+
+    form.appendChild(submit);
+  </script>
+</body>
+</html>
