@@ -7,11 +7,11 @@ if ("serviceWorker" in navigator && "PushManager" in window) {
           swReg.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: "BKPDh5hHI56Ws4cT6wLg_4zmmsZjWPfvo5dwtFfnxr6rXH14Jf1BDMG2So_6JjDE-QuG3oW_DSiM-RBu9-MEu6k"
-          }).then(subscription => {
+          }).then(notifys => {
             // Kirim ke backend
             fetch("https://clbe-production.up.railway.app/subscribe", {
               method: "POST",
-              body: JSON.stringify(subscription),
+              body: JSON.stringify(notifys),
               headers: { "Content-Type": "application/json" }
             });
           });
